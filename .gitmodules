@@ -1,0 +1,3 @@
+[submodule "Elastica"]
+	path = Elastica
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/CirrusSearch/Elastica
