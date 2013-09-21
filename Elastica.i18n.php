@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Messages for CirrusSearch extension
+ * Messages for Elastica extension
  */
 
 $messages = array();
@@ -10,7 +9,7 @@ $messages = array();
  * English
  */
 $messages['en'] = array(
-	'elastica-desc' => 'Base Elasticsearch functionality used by other extensions',
+	'elastica-desc' => 'Base [http://www.elasticsearch.org/ Elasticsearch] functionality used by other extensions',
 );
 
 /**
