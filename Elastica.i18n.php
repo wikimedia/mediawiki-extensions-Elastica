@@ -33,9 +33,65 @@ $messages['fr'] = array(
 	'elastica-desc' => 'Fonctionnalité [http://www.elasticsearch.org/ Elasticsearch] de base utilisée par d’autres extensions',
 );
 
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'elastica-desc' => 'Funcionalidade [http://www.elasticsearch.org/ Elasticsearch] de base usada por outras extensións',
+);
+
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'elastica-desc' => 'Funzionalità di base [http://www.elasticsearch.org/ Elasticsearch] utilizzate da altre estensioni',
+);
+
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'elastica-desc' => '他の拡張機能が使用する Elasticsearch 機能',
+);
+
+/** Macedonian (македонски)
+ * @author Bjankuloski06
+ */
+$messages['mk'] = array(
+	'elastica-desc' => 'Основна функција на [http://www.elasticsearch.org/ Elasticsearch] што ја користат други додатоци',
+);
+
+/** Brazilian Portuguese (português do Brasil)
+ * @author Jaideraf
+ */
+$messages['pt-br'] = array(
+	'elastica-desc' => "Funcionalidade base do mecanismo de busca ''Elasticsearch'', utilizada por outras extensões",
+);
+
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'elastica-desc' => 'Basate sus a funzionalità [http://www.elasticsearch.org/ Elasticsearch] ausate da otre estenziune',
+);
+
+/** Russian (русский)
+ * @author Okras
+ */
+$messages['ru'] = array(
+	'elastica-desc' => 'Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] используется другими модулями',
+);
+
 /** Ukrainian (українська)
  * @author Andriykopanytsia
  */
 $messages['uk'] = array(
 	'elastica-desc' => 'Базова [http://www.elasticsearch.org/ Elasticsearch] функціональність, використана іншими розширеннями',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Liuxinyu970226
+ */
+$messages['zh-hans'] = array(
+	'elastica-desc' => '使用其他基本[http://www.elasticsearch.org/ Elasticsearch]功能扩展',
 );
