@@ -19,11 +19,25 @@ $messages['qqq'] = array(
 "Elasticsearch" is a full-text search engines. See http://www.elasticsearch.org/',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'elastica-desc' => "Funcionalidá básica de [http://www.elasticsearch.org/ Elasticsearch] qu'usen otres estensiones",
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
 $messages['de'] = array(
 	'elastica-desc' => 'Basis-[http://www.elasticsearch.org/ Elasticsearch]-Funktionalität, die von anderen Erweiterungen verwendet wird',
+);
+
+/** Spanish (español)
+ * @author Fitoschido
+ */
+$messages['es'] = array(
+	'elastica-desc' => 'Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones',
 );
 
 /** French (français)
@@ -87,6 +101,13 @@ $messages['ru'] = array(
  */
 $messages['uk'] = array(
 	'elastica-desc' => 'Базова [http://www.elasticsearch.org/ Elasticsearch] функціональність, використана іншими розширеннями',
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'elastica-desc' => 'Các chức năng [http://www.elasticsearch.org/ Elasticsearch] cơ bản được sử dụng bởi các phần mở rộng khác',
 );
 
 /** Simplified Chinese (中文（简体）‎)
