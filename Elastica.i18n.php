@@ -82,6 +82,13 @@ $messages['mk'] = array(
 	'elastica-desc' => 'Основна функција на [http://www.elasticsearch.org/ Elasticsearch] што ја користат други додатоци',
 );
 
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'elastica-desc' => 'Kefungsian [http://www.elasticsearch.org/ Elasticsearch] asas yang digunakan oleh ekstensi-ekstensi lain',
+);
+
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
