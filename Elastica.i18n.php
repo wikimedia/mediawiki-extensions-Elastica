@@ -54,6 +54,13 @@ $messages['gl'] = array(
 	'elastica-desc' => 'Funcionalidade [http://www.elasticsearch.org/ Elasticsearch] de base usada por outras extensións',
 );
 
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'elastica-desc' => 'Functionalitate basic de [http://www.elasticsearch.org/ Elasticsearch] usate per altere extensiones',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
@@ -94,6 +101,13 @@ $messages['roa-tara'] = array(
  */
 $messages['ru'] = array(
 	'elastica-desc' => 'Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] используется другими модулями',
+);
+
+/** Slovenian (slovenščina)
+ * @author Eleassar
+ */
+$messages['sl'] = array(
+	'elastica-desc' => 'Funkcionalnost baze [http://www.elasticsearch.org/ Elasticsearch], ki jo uporabljajo druge razširitve',
 );
 
 /** Ukrainian (українська)
