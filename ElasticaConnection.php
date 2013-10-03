@@ -18,7 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  */
-class ElasticaConnection {
+abstract class ElasticaConnection {
 	/**
 	 * Singleton instance of the client
 	 * @var \Elastica\Client
@@ -28,15 +28,20 @@ class ElasticaConnection {
 	/**
 	 * @return array(string) server ips or hostnames
 	 */
-	public static function getServerList() {
-		throw new MWException( 'Must be overridden. ');
-	}
+	public abstract function getServerList();
 
 	/**
 	 * @return string base name for index
 	 */
-	public static function getIndexBaseName() {
-		throw new MWException( 'Must be overridden. ');
+	public abstract function getIndexBaseName();
+
+	/**
+	 * How many times can we attempt to connect per host?
+	 *
+	 * @return int
+	 */
+	public function getMaxConnectionAttempts() {
+		return 1;
 	}
 
 	/**
@@ -44,18 +49,36 @@ class ElasticaConnection {
 	 * @return \Elastica\Client
 	 */
 	public static function getClient() {
-		if ( self::$client != null ) {
-			return self::$client;
+		if ( self::$client === null ) {
+			// Setup the Elastica servers
+			$servers = array();
+			$me = new static();
+			foreach ( $me->getServerList() as $server ) {
+				$servers[] = array( 'host' => $server );
+			}
+
+			self::$client = new \Elastica\Client( array( 'servers' => $servers ),
+				/**
+				 * Callback for \Elastica\Client on request failures.
+				 * @param \Elastica\Connection $connection The current connection to elasticasearch
+				 * @param \Elastica\Exception $e Exception to be thrown if we don't do anything
+				 * @param \ElasticaConnection $me Child class of us
+				 */
+				function( $connection, $e ) use ( $me ) {
+					// Keep track of the number of times we've hit a host
+					static $connectionAttempts = array();
+					$host = $connection->getConfig( 'host' );
+					$connectionAttempts[$host] = isset( $connectionAttempts[$host] )
+						? $connectionAttempts[$host] + 1 : 1;
+
+					// Check if we've hit the host the max # of times. If not, try again
+					if ( $connectionAttempts[$host] < $me->getMaxConnectionAttempts() ) {
+						$connection->setEnabled( true );
+					}
+				}
+			);
 		}
 
-		// Setup the Elastica endpoints
-		$servers = array();
-		foreach ( static::getServerList() as $server ) {
-			$servers[] = array('host' => $server);
-		}
-		self::$client = new \Elastica\Client( array(
-			'servers' => $servers
-		) );
 		return self::$client;
 	}
 
