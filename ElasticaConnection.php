@@ -108,4 +108,15 @@ abstract class ElasticaConnection {
 		}
 		return $name;
 	}
+
+	public static function destroySingleton() {
+		self::$client = null;
+		ElasticaHttpTransportCloser::destroySingleton();
+	}
+}
+
+class ElasticaHttpTransportCloser extends \Elastica\Transport\Http {
+	public static function destroySingleton() {
+		\Elastica\Transport\Http::$_curlConnection = null;
+	}
 }
