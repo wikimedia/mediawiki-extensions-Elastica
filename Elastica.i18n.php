@@ -26,6 +26,13 @@ $messages['ast'] = array(
 	'elastica-desc' => "Funcionalidá básica de [http://www.elasticsearch.org/ Elasticsearch] qu'usen otres estensiones",
 );
 
+/** Danish (dansk)
+ * @author Christian List
+ */
+$messages['da'] = array(
+	'elastica-desc' => 'Basis [http://www.elasticsearch.org/ Elasticsearch] funktionalitet der bruges af andre udvidelser',
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
