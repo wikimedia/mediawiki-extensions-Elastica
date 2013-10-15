@@ -26,6 +26,13 @@ $messages['ast'] = array(
 	'elastica-desc' => "Funcionalidá básica de [http://www.elasticsearch.org/ Elasticsearch] qu'usen otres estensiones",
 );
 
+/** Danish (dansk)
+ * @author Christian List
+ */
+$messages['da'] = array(
+	'elastica-desc' => 'Basis [http://www.elasticsearch.org/ Elasticsearch] funktionalitet der bruges af andre udvidelser',
+);
+
 /** German (Deutsch)
  * @author Metalhead64
  */
@@ -73,6 +80,13 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'elastica-desc' => '他の拡張機能が使用する Elasticsearch 機能',
+);
+
+/** Korean (한국어)
+ * @author Kwj2772
+ */
+$messages['ko'] = array(
+	'elastica-desc' => '다른 확장 기능에서 사용되는 기본 [http://www.elasticsearch.org/ Elasticsearch] 기능',
 );
 
 /** Macedonian (македонски)
