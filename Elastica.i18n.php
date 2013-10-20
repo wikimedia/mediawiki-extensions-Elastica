@@ -61,6 +61,13 @@ $messages['gl'] = array(
 	'elastica-desc' => 'Funcionalidade [http://www.elasticsearch.org/ Elasticsearch] de base usada por outras extensións',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'elastica-desc' => 'יכולות בסיסיות של [http://www.elasticsearch.org/ Elasticsearch] שמשמשות בהרחבות אחרות',
+);
+
 /** Interlingua (interlingua)
  * @author McDutchie
  */
