@@ -79,22 +79,23 @@ abstract class ElasticaConnection {
 
 	/**
 	 * Fetch the Elastica Index.
+	 * @param string $name get the index(es) with this basename
 	 * @param mixed $type type of index (named type or false to get all)
-	 * @param mixed $identifier if specified get the named identified version of the index
+	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return \Elastica\Index
 	 */
-	public static function getIndex( $type = false, $identifier = false ) {
-		return self::getClient()->getIndex( self::getIndexName( $type, $identifier ) );
+	public static function getIndex( $name, $type = false, $identifier = false ) {
+		return self::getClient()->getIndex( self::getIndexName( $name, $type, $identifier ) );
 	}
 
 	/**
 	 * Get the name of the index.
+	 * @param string $name get the index(es) with this basename
 	 * @param mixed $type type of index (named type or false to get all)
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return string name of index for $type and $identifier
 	 */
-	public static function getIndexName( $type = false, $identifier = false ) {
-		$name = wfWikiId();
+	public static function getIndexName( $name, $type = false, $identifier = false ) {
 		if ( $type ) {
 			$name .= '_' . $type;
 		}
