@@ -34,10 +34,25 @@ $messages['da'] = array(
 );
 
 /** German (Deutsch)
+ * @author Kghbln
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'elastica-desc' => 'Basis-[http://www.elasticsearch.org/ Elasticsearch]-Funktionalität, die von anderen Erweiterungen verwendet wird',
+	'elastica-desc' => 'Stellt anderen Erweiterungen die Basisfunktionalität von [http://www.elasticsearch.org/ elasticsearch] bereit',
+);
+
+/** Swiss High German (Schweizer Hochdeutsch)
+ * @author Filzstift
+ */
+$messages['de-ch'] = array(
+	'elastica-desc' => 'Stellt anderen Erweiterungen die Basisfunktionalität von «[http://www.elasticsearch.org/ Elasticsearch]» bereit',
+);
+
+/** Lower Sorbian (dolnoserbski)
+ * @author Michawiki
+ */
+$messages['dsb'] = array(
+	'elastica-desc' => 'Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch], kótaraž wužywa se wót drugich rozšyrjenjow',
 );
 
 /** Spanish (español)
@@ -66,6 +81,13 @@ $messages['gl'] = array(
  */
 $messages['he'] = array(
 	'elastica-desc' => 'יכולות בסיסיות של [http://www.elasticsearch.org/ Elasticsearch] שמשמשות בהרחבות אחרות',
+);
+
+/** Upper Sorbian (hornjoserbsce)
+ * @author Michawiki
+ */
+$messages['hsb'] = array(
+	'elastica-desc' => 'Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch], kotraž so wot druhich rozšěrjenjow wužiwa',
 );
 
 /** Interlingua (interlingua)
@@ -110,6 +132,21 @@ $messages['ms'] = array(
 	'elastica-desc' => 'Kefungsian [http://www.elasticsearch.org/ Elasticsearch] asas yang digunakan oleh ekstensi-ekstensi lain',
 );
 
+/** Dutch (Nederlands)
+ * @author GerardM
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'elastica-desc' => 'Basisfunctionaliteit voor [http://www.elasticsearch.org/ Elasticsearch] gebruikt door andere uitbreidingen',
+);
+
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'elastica-desc' => 'Foncionalitat [http://www.elasticsearch.org/ Elasticsearch] de basa utilizada per d’autras extensions',
+);
+
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
@@ -136,6 +173,13 @@ $messages['ru'] = array(
  */
 $messages['sl'] = array(
 	'elastica-desc' => 'Funkcionalnost baze [http://www.elasticsearch.org/ Elasticsearch], ki jo uporabljajo druge razširitve',
+);
+
+/** Swedish (svenska)
+ * @author Bengt B
+ */
+$messages['sv'] = array(
+	'elastica-desc' => 'Grundläggande [http://www.elasticsearch.org/Elasticsearch] funktionalitet används av andra tillägg',
 );
 
 /** Ukrainian (українська)
