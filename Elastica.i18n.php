@@ -138,6 +138,13 @@ $messages['sl'] = array(
 	'elastica-desc' => 'Funkcionalnost baze [http://www.elasticsearch.org/ Elasticsearch], ki jo uporabljajo druge razširitve',
 );
 
+/** Swedish (svenska)
+ * @author Bengt B
+ */
+$messages['sv'] = array(
+	'elastica-desc' => 'Grundläggande [http://www.elasticsearch.org/Elasticsearch] funktionalitet används av andra tillägg',
+);
+
 /** Ukrainian (українська)
  * @author Andriykopanytsia
  */
