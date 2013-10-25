@@ -31,11 +31,6 @@ abstract class ElasticaConnection {
 	public abstract function getServerList();
 
 	/**
-	 * @return string base name for index
-	 */
-	public abstract function getIndexBaseName();
-
-	/**
 	 * How many times can we attempt to connect per host?
 	 *
 	 * @return int
