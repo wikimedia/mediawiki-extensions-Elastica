@@ -110,6 +110,13 @@ $messages['ms'] = array(
 	'elastica-desc' => 'Kefungsian [http://www.elasticsearch.org/ Elasticsearch] asas yang digunakan oleh ekstensi-ekstensi lain',
 );
 
+/** Occitan (occitan)
+ * @author Cedric31
+ */
+$messages['oc'] = array(
+	'elastica-desc' => 'Foncionalitat [http://www.elasticsearch.org/ Elasticsearch] de basa utilizada per d’autras extensions',
+);
+
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
