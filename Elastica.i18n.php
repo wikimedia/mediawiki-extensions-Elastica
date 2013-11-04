@@ -110,6 +110,13 @@ $messages['ms'] = array(
 	'elastica-desc' => 'Kefungsian [http://www.elasticsearch.org/ Elasticsearch] asas yang digunakan oleh ekstensi-ekstensi lain',
 );
 
+/** Dutch (Nederlands)
+ * @author GerardM
+ */
+$messages['nl'] = array(
+	'elastica-desc' => 'Basus [http://www.elasticsearch.org/ Elasticsearch] functionaliteit gebruikt door andere extensies',
+);
+
 /** Occitan (occitan)
  * @author Cedric31
  */
