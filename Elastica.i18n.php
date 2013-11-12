@@ -112,9 +112,10 @@ $messages['ms'] = array(
 
 /** Dutch (Nederlands)
  * @author GerardM
+ * @author Siebrand
  */
 $messages['nl'] = array(
-	'elastica-desc' => 'Basus [http://www.elasticsearch.org/ Elasticsearch] functionaliteit gebruikt door andere extensies',
+	'elastica-desc' => 'Basisfunctionaliteit voor [http://www.elasticsearch.org/ Elasticsearch] gebruikt door andere uitbreidingen',
 );
 
 /** Occitan (occitan)
