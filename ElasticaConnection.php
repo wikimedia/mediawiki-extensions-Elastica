@@ -60,14 +60,21 @@ abstract class ElasticaConnection {
 				 * @param \ElasticaConnection $me Child class of us
 				 */
 				function( $connection, $e ) use ( $me ) {
+					// We only want to try to reconnect on http connection errors
+					// Beyond that we want to give up fast.  Configuring a single connection
+					// through LVS accomplishes this.
+					if ( !( $e instanceof \Elastica\Exception\Connection\HttpException ) ||
+							$e->getError() !== CURLE_COULDNT_CONNECT ) {
+						return;
+					}
 					// Keep track of the number of times we've hit a host
 					static $connectionAttempts = array();
-					$host = $connection->getConfig( 'host' );
-					$connectionAttempts[$host] = isset( $connectionAttempts[$host] )
-						? $connectionAttempts[$host] + 1 : 1;
+					$host = $connection->getParam( 'host' );
+					$connectionAttempts[ $host ] = isset( $connectionAttempts[ $host ] )
+						? $connectionAttempts[ $host ] + 1 : 1;
 
 					// Check if we've hit the host the max # of times. If not, try again
-					if ( $connectionAttempts[$host] < $me->getMaxConnectionAttempts() ) {
+					if ( $connectionAttempts[ $host ] < $me->getMaxConnectionAttempts() ) {
 						$connection->setEnabled( true );
 					}
 				}
