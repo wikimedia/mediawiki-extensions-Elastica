@@ -40,6 +40,13 @@ $messages['de'] = array(
 	'elastica-desc' => 'Basis-[http://www.elasticsearch.org/ Elasticsearch]-Funktionalität, die von anderen Erweiterungen verwendet wird',
 );
 
+/** Lower Sorbian (dolnoserbski)
+ * @author Michawiki
+ */
+$messages['dsb'] = array(
+	'elastica-desc' => 'Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch], kótaraž wužywa se wót drugich rozšyrjenjow',
+);
+
 /** Spanish (español)
  * @author Fitoschido
  */
@@ -66,6 +73,13 @@ $messages['gl'] = array(
  */
 $messages['he'] = array(
 	'elastica-desc' => 'יכולות בסיסיות של [http://www.elasticsearch.org/ Elasticsearch] שמשמשות בהרחבות אחרות',
+);
+
+/** Upper Sorbian (hornjoserbsce)
+ * @author Michawiki
+ */
+$messages['hsb'] = array(
+	'elastica-desc' => 'Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch], kotraž so wot druhich rozšěrjenjow wužiwa',
 );
 
 /** Interlingua (interlingua)
