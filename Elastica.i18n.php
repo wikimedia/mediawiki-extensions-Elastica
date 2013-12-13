@@ -34,10 +34,11 @@ $messages['da'] = array(
 );
 
 /** German (Deutsch)
+ * @author Kghbln
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'elastica-desc' => 'Basis-[http://www.elasticsearch.org/ Elasticsearch]-Funktionalität, die von anderen Erweiterungen verwendet wird',
+	'elastica-desc' => 'Stellt anderen Erweiterungen die Basisfunktionalität von [http://www.elasticsearch.org/ elasticsearch] bereit',
 );
 
 /** Lower Sorbian (dolnoserbski)
