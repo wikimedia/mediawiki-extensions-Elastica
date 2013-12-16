@@ -41,6 +41,13 @@ $messages['de'] = array(
 	'elastica-desc' => 'Stellt anderen Erweiterungen die Basisfunktionalität von [http://www.elasticsearch.org/ elasticsearch] bereit',
 );
 
+/** Swiss High German (Schweizer Hochdeutsch)
+ * @author Filzstift
+ */
+$messages['de-ch'] = array(
+	'elastica-desc' => 'Stellt anderen Erweiterungen die Basisfunktionalität von «[http://www.elasticsearch.org/ Elasticsearch]» bereit',
+);
+
 /** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
