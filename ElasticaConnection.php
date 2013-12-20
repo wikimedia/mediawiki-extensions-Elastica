@@ -88,6 +88,8 @@ abstract class ElasticaConnection {
 
 					// Check if we've hit the host the max # of times. If not, try again
 					if ( $connectionAttempts[ $host ] < $me->getMaxConnectionAttempts() ) {
+						wfLogWarning( "Retrying connection to $host after " . $connectionAttempts[ $host ] .
+							' attempts.' );
 						$connection->setEnabled( true );
 					}
 				}
