@@ -118,6 +118,13 @@ $messages['ko'] = array(
 	'elastica-desc' => '다른 확장 기능에서 사용되는 기본 [http://www.elasticsearch.org/ Elasticsearch] 기능',
 );
 
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'elastica-desc' => 'Basisfunktionalitéit [http://www.elasticsearch.org/ Elasticsearch] déi vun aneren Erweiderunge benotzt gëtt',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
