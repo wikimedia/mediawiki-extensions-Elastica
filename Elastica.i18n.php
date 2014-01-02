@@ -62,6 +62,13 @@ $messages['es'] = array(
 	'elastica-desc' => 'Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones',
 );
 
+/** Persian (فارسی)
+ * @author Armin1392
+ */
+$messages['fa'] = array(
+	'elastica-desc' => 'مبنای کارآمدی [http://www.elasticsearch.org/ Elasticsearch] توسط گستره‌های دیگر  استفاده شده.',
+);
+
 /** French (français)
  * @author Gomoko
  */
