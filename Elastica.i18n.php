@@ -26,6 +26,13 @@ $messages['ast'] = array(
 	'elastica-desc' => "Funcionalidá básica de [http://www.elasticsearch.org/ Elasticsearch] qu'usen otres estensiones",
 );
 
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+ * @author Red Winged Duck
+ */
+$messages['be-tarask'] = array(
+	'elastica-desc' => 'Базавая функцыянальнасьць [http://www.elasticsearch.org/ Elasticsearch], якая выкарыстоўваецца іншымі пашырэньнямі',
+);
+
 /** Danish (dansk)
  * @author Christian List
  */
