@@ -9,6 +9,7 @@ use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Suggest\AbstractSuggest;
+use Elastica\Suggest;
 
 /**
  * Elastica query object
@@ -47,8 +48,8 @@ class Query extends Param
             $this->setRawQuery($query);
         } elseif ($query instanceof AbstractQuery) {
             $this->setQuery($query);
-        } elseif ($query instanceof AbstractSuggest) {
-            $this->addSuggest($query);
+        } elseif ($query instanceof Suggest) {
+            $this->setSuggest($query);
         }
     }
 
@@ -80,6 +81,9 @@ class Query extends Param
             case is_string($query):
                 return new self(new QueryString($query));
             case $query instanceof AbstractSuggest:
+                return new self(new Suggest($query));
+
+            case $query instanceof Suggest:
                 return new self($query);
 
         }
@@ -324,6 +328,10 @@ class Query extends Param
             $this->setQuery(new MatchAll());
         }
 
+        if (isset($this->_params['facets']) && 0 === count($this->_params['facets'])) {
+            unset($this->_params['facets']);
+        }
+
         return $this->_params;
     }
 
@@ -346,11 +354,11 @@ class Query extends Param
     /**
      * Add a suggest term
      *
-     * @param  \Elastica\Query          Query object
+     * @param  \Elastica\Suggest $suggest suggestion object
      */
-    public function addSuggest($query)
+    public function setSuggest(Suggest $suggest)
     {
-        $this->addParam(NULL, $query->toArray());
+        $this->addParam(NULL, $suggest->toArray());
         $this->_suggest = 1;
     }
 }

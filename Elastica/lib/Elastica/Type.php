@@ -162,6 +162,22 @@ class Type implements SearchableInterface
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
+    public function updateDocuments(array $docs)
+    {
+        foreach ($docs as $doc) {
+            $doc->setType($this->getName());
+        }
+
+        return $this->getIndex()->updateDocuments($docs);
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
     public function addDocuments(array $docs)
     {
         foreach ($docs as $doc) {
@@ -209,12 +225,14 @@ class Type implements SearchableInterface
         $path = urlencode($id);
 
         try {
-            $result = $this->request($path, Request::GET, array(), $options)->getData();
+            $response = $this->request($path, Request::GET, array(), $options);
+            $result = $response->getData();
         } catch (ResponseException $e) {
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
-        if (empty($result['exists'])) {
+        $info = $response->getTransferInfo();
+        if ($info['http_code'] !== 200) {
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
@@ -358,6 +376,22 @@ class Type implements SearchableInterface
             )
         );
         return $this->deleteById($document->getId(), $options);
+    }
+
+    /**
+     * Uses _bulk to delete documents from the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function deleteDocuments(array $docs)
+    {
+        foreach ($docs as $doc) {
+            $doc->setType($this->getName());
+        }
+
+        return $this->getIndex()->deleteDocuments($docs);
     }
 
     /**

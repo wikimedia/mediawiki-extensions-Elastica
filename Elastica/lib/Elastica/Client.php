@@ -247,6 +247,30 @@ class Client
      * @throws \Elastica\Exception\InvalidException If docs is empty
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
+    public function updateDocuments(array $docs) {
+        if (empty($docs)) {
+            throw new InvalidException('Array has to consist of at least one element');
+        }
+
+        $bulk = new Bulk($this);
+
+        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+
+        return $bulk->send();
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * Array of \Elastica\Document as input. Index and type has to be
+     * set inside the document, because for bulk settings documents,
+     * documents can belong to any type and index
+     *
+     * @param  array|\Elastica\Document[]           $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet                   Response object
+     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
     public function addDocuments(array $docs)
     {
         if (empty($docs)) {
@@ -580,7 +604,6 @@ class Client
             {
                 throw $e;
             }
-            
             return $this->request($path, $method, $data, $query);
         }
     }
@@ -594,7 +617,18 @@ class Client
      */
     public function optimizeAll($args = array())
     {
-        return $this->request('_optimize', Request::POST, $args);
+        return $this->request('_optimize', Request::POST, array(), $args);
+    }
+
+    /**
+     * Refreshes all search indices
+     *
+     * @return \Elastica\Response Response object
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html
+     */
+    public function refreshAll()
+    {
+        return $this->request('_refresh', Request::POST);
     }
 
     /**
@@ -617,7 +651,7 @@ class Client
             } else {
                 $data = array('message' => $context);
             }
-            $this->_logger->info('logging Request', $data);
+            $this->_logger->debug('logging Request', $data);
         }
     }
 

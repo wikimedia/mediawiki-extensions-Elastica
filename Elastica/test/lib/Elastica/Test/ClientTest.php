@@ -143,6 +143,106 @@ class ClientTest extends BaseTest
     }
 
     /**
+     * Test bulk operations on Index
+     */
+    public function testBulkIndex()
+    {
+        $index = $this->_getClient()->getIndex('cryptocurrencies');
+
+        $anonCoin = new Document(1, array('name' => 'anoncoin'), 'altcoin');
+        $ixCoin = new Document(2, array('name' => 'ixcoin'), 'altcoin');
+
+        $index->addDocuments(array($anonCoin, $ixCoin));
+
+        $this->assertEquals('anoncoin', $index->getType('altcoin')->getDocument(1)->get('name'));
+        $this->assertEquals('ixcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+
+        $index->updateDocuments(array(
+            new Document(1, array('name' => 'AnonCoin'), 'altcoin'),
+            new Document(2, array('name' => 'iXcoin'), 'altcoin')
+        ));
+
+        $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
+        $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+
+        $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
+        $index->deleteDocuments(array($anonCoin, $ixCoin));
+
+        $this->setExpectedException('Elastica\Exception\NotFoundException');
+        $index->getType('altcoin')->getDocument(1);
+        $index->getType('altcoin')->getDocument(2);
+    }
+
+    /**
+     * Test bulk operations on Type
+     */
+    public function testBulkType()
+    {
+        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('altcoin');
+
+        $liteCoin = new Document(1, array('name' => 'litecoin'));
+        $nameCoin = new Document(2, array('name' => 'namecoin'));
+
+        $type->addDocuments(array($liteCoin, $nameCoin));
+
+        $this->assertEquals('litecoin', $type->getDocument(1)->get('name'));
+        $this->assertEquals('namecoin', $type->getDocument(2)->get('name'));
+
+        $type->updateDocuments(array(
+            new Document(1, array('name' => 'LiteCoin')),
+            new Document(2, array('name' => 'NameCoin'))
+        ));
+
+        $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
+        $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
+
+        $nameCoin->setType(null);  // Make sure the type gets set properly if missing
+        $type->deleteDocuments(array($liteCoin, $nameCoin));
+
+        $this->setExpectedException('Elastica\Exception\NotFoundException');
+        $type->getDocument(1);
+        $type->getDocument(2);
+    }
+
+    public function testUpdateDocuments()
+    {
+        $indexName = 'test';
+        $typeName = 'people';
+
+        $client = $this->_getClient();
+        $type = $client->getIndex($indexName)->getType($typeName);
+
+        $initialValue = 28;
+        $modifiedValue = 27;
+
+        $doc1 = new Document(
+            1,
+            array('name' => 'hans', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $doc2 = new Document(
+            2,
+            array('name' => 'anna', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $data = array($doc1, $doc2);
+        $client->addDocuments($data);
+
+        foreach ($data as $i => $doc) {
+            $data[$i]->age = $modifiedValue;
+        }
+        $client->updateDocuments($data);
+
+        $docData1 = $type->getDocument(1)->getData();
+        $docData2 = $type->getDocument(2)->getData();
+
+        $this->assertEquals($modifiedValue, $docData1['age']);
+        $this->assertEquals($modifiedValue, $docData2['age']);
+    }
+
+    /**
     * Test deleteIds method using string parameters
     *
     * This test ensures that the deleteIds method of
