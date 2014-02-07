@@ -124,14 +124,14 @@ class Bulk
      */
     public function getPath()
     {
-        $path = '/';
+        $path = '';
         if ($this->hasIndex()) {
-            $path.= $this->getIndex() . '/';
+            $path .= $this->getIndex() . '/';
             if ($this->hasType()) {
-                $path.= $this->getType() . '/';
+                $path .= $this->getType() . '/';
             }
         }
-        $path.= '_bulk';
+        $path .= '_bulk';
         return $path;
     }
 
@@ -285,7 +285,7 @@ class Bulk
      * @var string $name name of the parameter
      * @var string $value value of the parameter
      */
-    public function setRequestParam( $name, $value ) {
+    public function setRequestParam($name, $value) {
         $this->_requestParams[ $name ] = $value;
     }
 
@@ -294,7 +294,7 @@ class Bulk
      * Requires Elasticsearch version >= 0.90.8.
      * @var string $time timeout in Elasticsearch time format
      */
-    public function setShardTimeout( $time ) {
+    public function setShardTimeout($time) {
         $this->setRequestParam( 'timeout', $time );
     }
 

@@ -114,6 +114,22 @@ class Index implements SearchableInterface
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
+    public function updateDocuments(array $docs)
+    {
+        foreach ($docs as $doc) {
+            $doc->setIndex($this->getName());
+        }
+
+        return $this->getClient()->updateDocuments($docs);
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
     public function addDocuments(array $docs)
     {
         foreach ($docs as $doc) {
@@ -136,6 +152,22 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Uses _bulk to delete documents from the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function deleteDocuments(array $docs)
+    {
+        foreach ($docs as $doc) {
+            $doc->setIndex($this->getName());
+        }
+
+        return $this->getClient()->deleteDocuments($docs);
+    }
+
+    /**
      * Optimizes search index
      *
      * Detailed arguments can be found here in the link
@@ -146,8 +178,7 @@ class Index implements SearchableInterface
      */
     public function optimize($args = array())
     {
-        // TODO: doesn't seem to work?
-        $this->request('_optimize', Request::POST, $args);
+        $this->request('_optimize', Request::POST, array(), $args);
     }
 
     /**
@@ -403,5 +434,21 @@ class Index implements SearchableInterface
         $path = $this->getName() . '/' . $path;
 
         return $this->getClient()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Analyzes a string
+     *
+     * Detailed arguments can be found here in the link
+     *
+     * @param  string $text  String to be analyzed
+     * @param  array  $args  OPTIONAL Additional arguments
+     * @return array Server response
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html
+     */
+    public function analyze($text, $args = array())
+    {
+        $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
+        return $data['tokens'];
     }
 }

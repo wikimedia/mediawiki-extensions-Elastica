@@ -1,5 +1,88 @@
 CHANGES
 
+2014-01-02
+- Release v0.90.10
+
+2014-01-31
+- Fix _bulk delete proxy methods if type or index not explicitly defined.
+
+2014-01-28
+- Add _bulk delete proxy methods to Index and Type for consistency.
+- Use the HTTP response code of GET requests (getDocument), instead of extists/found json property.
+
+2014-01-22
+- Add getParam & getProperties methods to Elastica\Type\Mapping
+
+2014-01-21
+- Code coverage generation for coveralls.io added: https://coveralls.io/r/ruflin/Elastica
+- Add support for shard timeout to the Bulk api.
+
+2014-01-17
+- Fix typo in constant name: Elastica\Query\FunctionScore::DECAY_GUASS becomes DECAY_GAUSS
+
+2014-01-13
+- Add support for _bulk update
+
+2014-01-14
+- added \Elastica\Exception\ResponseException::getElasticsearchException()
+- Changed logger default log level to debug from info
+
+2014-01-13
+- Update to elasticsearch 0.90.10
+- Add Elastica\Facet\TermsStats::setOrder()
+
+2014-01-08
+- Adding analyze function to Index to expose the _analyze API
+
+2014-01-07
+- Document::setDocAsUpsert() now returns the Document
+
+2013-12-18
+- Update to Elasticsearch 0.90.8
+- Add support for simple_query_string query
+
+2013-12-15
+- Add support for filter inside HasChild filter
+- Add support for filter inside HasParent filter
+
+2013-12-12
+- Always send scroll_id via HTTP body instead of as a query param
+- Fix the manner in which suggestion results are returned in \Elastica\ResultSet and adjust associated tests to account for the fix.
+- Add \Elastica\Resultset::hasSuggests()
+
+2013-12-11
+- Pass arguments to optimize as query
+- Add refreshAll on Client
+
+2013-12-07
+- Added Result::hasFields() and Result::hasParam() methods for consistency with Document
+
+2013-12-07
+- Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
+
+2013-12-05
+- Add *.iml to .gitignore
+- Refactor suggest implementation (\Elastica\Suggest, \Elastica\Suggest\AbstractSuggest, and \Elastica\Suggest\Term) to more closely resemble query implementation. (BC break)
+- \Elastica\Search::addSuggest() has been renamed to \Elastica\Search::setSuggest()
+- \Elastica\Query::addSuggest() has been renamed to \Elastica\Query::setSuggest()
+- Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator
+  (see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
+
+2013-12-04
+- Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
+
+2013-12-02
+- Issue #491 resolved
+
+2013-12-01
+- Issue #501 resolved
+- satooshi/php-coveralls package added for coverall.io
+- Multiple badges for downloads and latest stable release added
+
+2013-11-30
+- Remove facets param from query if is empty array
+- Add size param to API for TermsStats
+
 2013-11-23
 - Release v0.90.7.0
 
