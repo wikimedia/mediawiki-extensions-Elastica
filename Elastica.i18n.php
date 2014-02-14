@@ -146,6 +146,13 @@ $messages['mk'] = array(
 	'elastica-desc' => 'Основна функција на [http://www.elasticsearch.org/ Elasticsearch] што ја користат други додатоци',
 );
 
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'elastica-desc' => 'മറ്റ് അനുബന്ധങ്ങൾ ഉപയോഗിക്കുന്ന അടിസ്ഥാന [http://www.elasticsearch.org/ ഇലാസ്റ്റിൿസേർച്ച്] സൗകര്യം',
+);
+
 /** Malay (Bahasa Melayu)
  * @author Anakmalaysia
  */
