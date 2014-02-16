@@ -132,6 +132,13 @@ $messages['ko'] = array(
 	'elastica-desc' => '다른 확장 기능에서 사용되는 기본 [http://www.elasticsearch.org/ Elasticsearch] 기능',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'elastica-desc' => 'Jrondlääje Aandeile vum <i lang="en" xml:lang="en">[http://www.elasticsearch.org/ Elasticsearch]</i>, di andere Zohsazprojramme bruche.',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
