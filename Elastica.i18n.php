@@ -203,6 +203,13 @@ $messages['ru'] = array(
 	'elastica-desc' => 'Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] используется другими модулями',
 );
 
+/** Scots (Scots)
+ * @author John Reid
+ */
+$messages['sco'] = array(
+	'elastica-desc' => 'Base [http://www.elasticsearch.org/ Elasticsearch] functionality uised bi ither extensions',
+);
+
 /** Slovenian (slovenščina)
  * @author Eleassar
  */
