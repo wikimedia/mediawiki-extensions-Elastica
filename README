@@ -45,14 +45,6 @@ Add this to LocalSettings.php:
  require_once( "$IP/extensions/Elastica/Elastica.php" );
 
 
-Submodule
----------
-Elasticsearch includes the Elastica library as a git submodule.  If you clone
-this repository you'll need to:
- git submodule update --init
-to drop Elastica into place correctly.
-
-
 Licensing information
 ---------------------
 CirrusSearch makes use of the Elastica library to connect to Elasticsearch
