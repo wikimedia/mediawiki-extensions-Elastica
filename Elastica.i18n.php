@@ -26,6 +26,13 @@ $messages['ast'] = array(
 	'elastica-desc' => "Funcionalidá básica de [http://www.elasticsearch.org/ Elasticsearch] qu'usen otres estensiones",
 );
 
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+ * @author Red Winged Duck
+ */
+$messages['be-tarask'] = array(
+	'elastica-desc' => 'Базавая функцыянальнасьць [http://www.elasticsearch.org/ Elasticsearch], якая выкарыстоўваецца іншымі пашырэньнямі',
+);
+
 /** Danish (dansk)
  * @author Christian List
  */
@@ -60,6 +67,13 @@ $messages['dsb'] = array(
  */
 $messages['es'] = array(
 	'elastica-desc' => 'Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones',
+);
+
+/** Persian (فارسی)
+ * @author Armin1392
+ */
+$messages['fa'] = array(
+	'elastica-desc' => 'مبنای کارآمدی [http://www.elasticsearch.org/ Elasticsearch] توسط گستره‌های دیگر  استفاده شده.',
 );
 
 /** French (français)
@@ -118,11 +132,32 @@ $messages['ko'] = array(
 	'elastica-desc' => '다른 확장 기능에서 사용되는 기본 [http://www.elasticsearch.org/ Elasticsearch] 기능',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'elastica-desc' => 'Jrondlääje Aandeile vum <i lang="en" xml:lang="en">[http://www.elasticsearch.org/ Elasticsearch]</i>, di andere Zohsazprojramme bruche.',
+);
+
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'elastica-desc' => 'Basisfunktionalitéit [http://www.elasticsearch.org/ Elasticsearch] déi vun aneren Erweiderunge benotzt gëtt',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
 	'elastica-desc' => 'Основна функција на [http://www.elasticsearch.org/ Elasticsearch] што ја користат други додатоци',
+);
+
+/** Malayalam (മലയാളം)
+ * @author Praveenp
+ */
+$messages['ml'] = array(
+	'elastica-desc' => 'മറ്റ് അനുബന്ധങ്ങൾ ഉപയോഗിക്കുന്ന അടിസ്ഥാന [http://www.elasticsearch.org/ ഇലാസ്റ്റിൿസേർച്ച്] സൗകര്യം',
 );
 
 /** Malay (Bahasa Melayu)
@@ -166,6 +201,13 @@ $messages['roa-tara'] = array(
  */
 $messages['ru'] = array(
 	'elastica-desc' => 'Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] используется другими модулями',
+);
+
+/** Scots (Scots)
+ * @author John Reid
+ */
+$messages['sco'] = array(
+	'elastica-desc' => 'Base [http://www.elasticsearch.org/ Elasticsearch] functionality uised bi ither extensions',
 );
 
 /** Slovenian (slovenščina)
