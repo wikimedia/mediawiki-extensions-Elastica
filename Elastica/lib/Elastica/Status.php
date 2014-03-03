@@ -121,7 +121,7 @@ class Status
     {
         $response = null;
         try {
-            $response = $this->_client->request("/_alias/$alias");
+            $response = $this->_client->request('/_alias/' . $alias);
         } catch (ResponseException $e) {
             $transferInfo = $e->getResponse()->getTransferInfo();
             // 404 means the index alias doesn't exist which means no indexes have it.

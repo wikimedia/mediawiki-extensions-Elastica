@@ -1,5 +1,58 @@
 CHANGES
 
+2014-03-04
+- Add PHP 5.6 to travis test environment
+- Issue #563: Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices
+
+2014-03-02
+- Release v1.0.1.0
+- Issue #554: Fixed Type->deleteByQuery() not working with Query objects
+
+2014-02-27
+- Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
+
+2014-02-25
+- Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action
+
+2014-02-20
+- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route.
+
+2014-02-17
+- Throw PartialShardFailureException if response has failed shards
+- Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation
+
+2014-02-14
+- Add methods setSize, setShardSize to Elastica/Aggregation/Terms
+- Elastica/Aggregation/GlobalAggregationTest fixed bug where JSON returned [] instead of {}
+- Elastica/ResultSet added method hasAggregations
+
+2014-02-13
+- Moved from Apache License to MIT license
+
+2014-02-12
+- Release v1.0.0.0
+- Updated to elasticsearch 1.0: http://www.elasticsearch.org/blog/1-0-0-released/
+
+2014-02-11
+- Add aggregations
+
+2014-02-08
+- Setting shard timeout doesn't work #547
+
+2014-02-04
+- Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1
+- Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1
+- Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml
+- Adjust tests to account for changes in ES 1.0.0.RC1
+- Prevent the geocluster-facet plugin from being installed in test/bin/run_elasticsearch.sh as the plugin has not yet been updated for ES 1.0.0.RC1
+
+2014-01-06
+- Update to elasticsearch v1.0.0.RC2
+
+2014-01-02
+- Added Elastica\Query\DisMax
+- Update to elasticsearch v1.0.0.RC1
+
 2014-01-02
 - Release v0.90.10
 
