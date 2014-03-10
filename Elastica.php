@@ -80,6 +80,7 @@ $wgAutoloadClasses['Elastica\Exception\ExceptionInterface'] = $elasticaDir . 'Ex
 $wgAutoloadClasses['Elastica\Exception\InvalidException'] = $elasticaDir . 'Exception/InvalidException.php';
 $wgAutoloadClasses['Elastica\Exception\NotFoundException'] = $elasticaDir . 'Exception/NotFoundException.php';
 $wgAutoloadClasses['Elastica\Exception\NotImplementedException'] = $elasticaDir . 'Exception/NotImplementedException.php';
+$wgAutoloadClasses['Elastica\Exception\PartialShardFailureException'] = $elasticaDir . 'Exception/PartialShardFailureException.php';
 $wgAutoloadClasses['Elastica\Exception\ResponseException'] = $elasticaDir . 'Exception/ResponseException.php';
 $wgAutoloadClasses['Elastica\Exception\RuntimeException'] = $elasticaDir . 'Exception/RuntimeException.php';
 $wgAutoloadClasses['Elastica\Exception\Bulk\ResponseException'] = $elasticaDir . 'Exception/Bulk/ResponseException.php';
