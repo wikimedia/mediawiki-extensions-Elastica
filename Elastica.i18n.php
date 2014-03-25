@@ -219,9 +219,10 @@ $messages['sl'] = array(
 
 /** Swedish (svenska)
  * @author Bengt B
+ * @author Lokal Profil
  */
 $messages['sv'] = array(
-	'elastica-desc' => 'Grundläggande [http://www.elasticsearch.org/Elasticsearch] funktionalitet används av andra tillägg',
+	'elastica-desc' => 'Grundläggande [http://www.elasticsearch.org/ Elasticsearch] funktionalitet som används av andra tillägg',
 );
 
 /** Ukrainian (українська)
