@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "GerardM",
+            "Siebrand"
+        ]
+    },
+    "elastica-desc": "Basisfunctionaliteit voor [http://www.elasticsearch.org/ Elasticsearch] gebruikt door andere uitbreidingen"
+}

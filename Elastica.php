@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Elasticsearch base extension.  Used by other extensions to ease working with
  * elasticsearch.
@@ -26,17 +25,14 @@ $wgExtensionCredits['other'][] = array(
 	'author'         => array( 'Nik Everett', 'Chad Horohoe' ),
 	'descriptionmsg' => 'elastica-desc',
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:Elastica',
-	'version'        => '0.1'
+	'version'        => '0.2'
 );
-
 
 /**
  * Classes
  */
 $dir = __DIR__ . '/';
 $wgAutoloadClasses['ElasticaConnection'] = $dir . 'ElasticaConnection.php';
-
-
 
 $elasticaDir = $dir . 'Elastica/lib/Elastica/';
 $wgAutoloadClasses['Elastica\Bulk'] = $elasticaDir . 'Bulk.php';
@@ -175,10 +171,8 @@ $wgAutoloadClasses['Elastica\Transport\Thrift'] = $elasticaDir . 'Transport/Thri
 $wgAutoloadClasses['Elastica\Type\AbstractType'] = $elasticaDir . 'Type/AbstractType.php';
 $wgAutoloadClasses['Elastica\Type\Mapping'] = $elasticaDir . 'Type/Mapping.php';
 
-
-
-
 /**
  * i18n
  */
+$wgMessagesDirs['Elastica'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['Elastica'] = $dir . 'Elastica.i18n.php';

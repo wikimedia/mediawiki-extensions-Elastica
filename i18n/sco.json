@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "John Reid"
+        ]
+    },
+    "elastica-desc": "Base [http://www.elasticsearch.org/ Elasticsearch] functionality uised bi ither extensions"
+}

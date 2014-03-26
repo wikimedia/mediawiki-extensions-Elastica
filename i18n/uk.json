@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "Andriykopanytsia"
+        ]
+    },
+    "elastica-desc": "Базова [http://www.elasticsearch.org/ Elasticsearch] функціональність, використана іншими розширеннями"
+}
