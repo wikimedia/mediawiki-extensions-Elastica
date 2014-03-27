@@ -49,5 +49,5 @@ Licensing information
 ---------------------
 CirrusSearch makes use of the Elastica library to connect to Elasticsearch
 <http://elastica.io/>.
-It is Apache licensed and you can read the license Elastica/LICENSE.txt once
-you've initialized submodules.
+It is Apache licensed and you can read the license Elastica/LICENSE.txt for
+more information.

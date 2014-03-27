@@ -25,7 +25,7 @@ $wgExtensionCredits['other'][] = array(
 	'author'         => array( 'Nik Everett', 'Chad Horohoe' ),
 	'descriptionmsg' => 'elastica-desc',
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:Elastica',
-	'version'        => '0.2'
+	'version'        => '1.0.1.2'
 );
 
 /**
