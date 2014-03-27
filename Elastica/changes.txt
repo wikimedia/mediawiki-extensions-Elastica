@@ -1,25 +1,61 @@
 CHANGES
 
+2014-03-24
+- Release v1.0.1.2
+- Added Filter\Indices #574
+
+2014-03-25
+- Allow json string as data srouce for Bulk\Action on update #575
+
+2014-03-20
+- Allow for request params in delete by query calls #573
+
+2014-03-17
+- Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568
+
+2014-03-15
+- Percolate existing documents and add percolate options (#570)
+
+2014-03-14
+- Added Query\Rescore #441
+
+2014-03-13
+- Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) #569
+- Added missing query options for Match (zero_terms_query, cutoff_frequency) #569
+
+2014-03-11
+- Fixed request body reuse in http transport #567
+
+2014-03-08
+- Release v1.0.1.1
+- Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis
+- Run elasticsearch in the background to not have log output in travis build
+- Set memache php version as environment variable
+- Update to memcache 3.0.8 for travis
+
+2014-03-07
+- Add snapshot / restore functionality (Elastica\Snapshot) #566
+
 2014-03-04
 - Add PHP 5.6 to travis test environment
-- Issue #563: Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices
+- Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices #563
 
 2014-03-02
 - Release v1.0.1.0
-- Issue #554: Fixed Type->deleteByQuery() not working with Query objects
+- Fixed Type->deleteByQuery() not working with Query objects #554
 
 2014-02-27
 - Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
 
 2014-02-25
-- Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action
+- Add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action #559
 
 2014-02-20
-- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route.
+- Fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. #558
 
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
-- Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation
+- Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation #555
 
 2014-02-14
 - Add methods setSize, setShardSize to Elastica/Aggregation/Terms
