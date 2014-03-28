@@ -4,5 +4,5 @@
             "Okras"
         ]
     },
-    "elastica-desc": "Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] используется другими модулями"
+    "elastica-desc": "Базовая функциональность [http://www.elasticsearch.org/ Elasticsearch] для других модулей, обеспечиваемая библиотекой [http://elastica.io/ Elastica]"
 }
