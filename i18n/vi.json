@@ -4,5 +4,5 @@
             "Minh Nguyen"
         ]
     },
-    "elastica-desc": "Các chức năng [http://www.elasticsearch.org/ Elasticsearch] cơ bản được sử dụng bởi các phần mở rộng khác"
+    "elastica-desc": "Hỗ trợ chức năng [http://www.elasticsearch.org/ Elasticsearch] cơ bản trong các phần mở rộng khác qua thư viện [http://elastica.io/ Elastica]"
 }
