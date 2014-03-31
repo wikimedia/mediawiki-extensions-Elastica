@@ -4,5 +4,5 @@
             "Beta16"
         ]
     },
-    "elastica-desc": "Funzionalità di base [http://www.elasticsearch.org/ Elasticsearch] utilizzate da altre estensioni"
+    "elastica-desc": "Funzionalità di base [http://www.elasticsearch.org/ Elasticsearch] per altre estensioni fornite dalla libreria [http://elastica.io/ Elastica]"
 }
