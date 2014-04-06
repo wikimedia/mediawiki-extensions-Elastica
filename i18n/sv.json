@@ -5,5 +5,5 @@
             "Lokal Profil"
         ]
     },
-    "elastica-desc": "Grundläggande [http://www.elasticsearch.org/ Elasticsearch] funktionalitet som används av andra tillägg"
+    "elastica-desc": "Grundläggande [http://www.elasticsearch.org/ Elasticsearch]-funktionalitet för andra tillägg genom att tillhandahålla [http://elastica.io/ Elastica]-bibliotek"
 }
