@@ -1,8 +1,8 @@
 {
-    "@metadata": {
-        "authors": [
-            "Michawiki"
-        ]
-    },
-    "elastica-desc": "Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch] za druhe rozšěrjenja přez dodawanje [http://elastica.io/Elastica biblioteki Elastica]"
+	"@metadata": {
+		"authors": [
+			"Michawiki"
+		]
+	},
+	"elastica-desc": "Zakładna funkcionalnosć [http://www.elasticsearch.org/ Elasticsearch] za druhe rozšěrjenja přez dodawanje [http://elastica.io/Elastica biblioteki Elastica]"
 }

@@ -1,8 +1,8 @@
 {
-    "@metadata": {
-        "authors": [
-            "Fitoschido"
-        ]
-    },
-    "elastica-desc": "Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones"
+	"@metadata": {
+		"authors": [
+			"Fitoschido"
+		]
+	},
+	"elastica-desc": "Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones"
 }

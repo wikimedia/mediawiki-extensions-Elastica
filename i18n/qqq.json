@@ -1,6 +1,4 @@
 {
-    "@metadata": {
-        "authors": []
-    },
-    "elastica-desc": "{{desc|name=Elastica|url=http://www.mediawiki.org/wiki/Extension:Elastica}}\n\"Elasticsearch\" is a full-text search engines. See http://www.elasticsearch.org/"
+	"@metadata": [],
+	"elastica-desc": "{{desc|name=Elastica|url=http://www.mediawiki.org/wiki/Extension:Elastica}}\n\"Elasticsearch\" is a full-text search engines. See http://www.elasticsearch.org/"
 }

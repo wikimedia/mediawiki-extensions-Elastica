@@ -1,8 +1,8 @@
 {
-    "@metadata": {
-        "authors": [
-            "Toliño"
-        ]
-    },
-    "elastica-desc": "Funcionalidade [http://www.elasticsearch.org/ Elasticsearch] de base para outras extensións achegando a biblioteca [http://elastica.io/ Elastica]"
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"elastica-desc": "Funcionalidade [http://www.elasticsearch.org/ Elasticsearch] de base para outras extensións achegando a biblioteca [http://elastica.io/ Elastica]"
 }

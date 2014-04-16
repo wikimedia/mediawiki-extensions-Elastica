@@ -1,8 +1,8 @@
 {
-    "@metadata": {
-        "authors": [
-            "Shirayuki"
-        ]
-    },
-    "elastica-desc": "他の拡張機能が使用する Elasticsearch 機能"
+	"@metadata": {
+		"authors": [
+			"Shirayuki"
+		]
+	},
+	"elastica-desc": "他の拡張機能が使用する Elasticsearch 機能"
 }
