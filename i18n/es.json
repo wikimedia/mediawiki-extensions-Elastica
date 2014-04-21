@@ -4,5 +4,5 @@
 			"Fitoschido"
 		]
 	},
-	"elastica-desc": "Funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] usada por otras extensiones"
+	"elastica-desc": "Proporciona funcionalidad básica de [http://www.elasticsearch.org/ Elasticsearch] para otras extensiones, con la biblioteca [http://elastica.io/ Elastica]"
 }
