@@ -1,5 +1,65 @@
 CHANGES
 
+2014-05-13
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling
+
+2014-05-12
+- Update dev builds to phpunit 4.1.*
+
+2014-05-11
+- Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.
+
+2014-05-05
+- Fix get settings on alaised index #608
+- Added named function for source filtering #605
+- Scroll type constant to Elastica\Search added #607
+
+2014-04-28
+- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
+- Typo fixes #600, #602
+- Remove unreachable return statement #598
+
+2014-04-27
+- Release v1.1.1.1
+- Fix missing use in TermsStats->setOrder() #597
+- Replace all instances of ElasticSearch with Elasticsearch #597
+
+2014-04-24
+- Fixing the Bool filter with Bool filter children bug #594
+
+2014-04-22
+- Remove useless echo in the Memcache Transport object #595
+
+2014-04-21
+- escape \ by \\ #592
+
+2014-04-20
+- Handling of HasChild type parsing bug #585
+- Consolidate Index getMapping tests #591
+- Fix Type::getMapping when using an aliased index #588
+
+2014-04-19
+- Release v1.1.1.0
+- Update to elasticsearch 1.1.1 http://www.elasticsearch.org/downloads/1-1-1/
+- Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 https://github.com/elasticsearch/elasticsearch/pull/5076/files
+- Update Node Info to use plugins instead of plugin (https://github.com/elasticsearch/elasticsearch/pull/5072)
+- Fix mapping issue for aliases #588
+
+2014-04-17
+- Only trap real JSON parse errors in Response class #586
+
+2014-04-09
+- Added Cardinality aggregation #581
+
+2014-04-7
+- Support for Terms filter lookup options #579
+
+2014-03-29
+- Update to elasticsearch 1.1.0 http://www.elasticsearch.org/downloads/1-1-0/
+
+2014-03-26
+- Fixed Query\Match Fuzziness parameter type #576
+
 2014-03-24
 - Release v1.0.1.2
 - Added Filter\Indices #574
