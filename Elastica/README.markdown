@@ -13,7 +13,7 @@ Contributing
 ------------
 Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). More details on how to contribute and guidelines for [pull requests](http://elastica.io/contribute/pull-request.html) can be found [here](http://elastica.io/contribute/).
 
-See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so. All changes which are made to the project are added to the [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt).
+See [Coding guidelines](http://elastica.io/contribute/coding-guidelines.html) for tips on how to do so. All changes which are made to the project are added to the [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt).
 
 
 Dependencies
@@ -22,7 +22,7 @@ Dependencies
 |---------|---------|----------|
 |[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.1.1)|1.1.1|yes|
 |[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1)|2.0.0.RC1|no|
-|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2)|2.0.0.RC2|no|
+|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0)|2.0.0|no|
 |[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.10)|0.0.10|no|
 
 

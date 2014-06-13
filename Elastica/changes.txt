@@ -1,7 +1,34 @@
 CHANGES
 
+2014-06-13
+- Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
+- Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635
+- rework Document and Script so they can share some infrastructure allowing scripts to specify things like _retry_on_conflict and _routing #629
+
+2014-06-11
+- Allow bulk API deletes to be routed #631
+
+2014-06-10
+- Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests
+
+2014-06-04
+- Implement Boosting Query (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
+
+2014-06-02
+- add retry_on_conflict support to bulk #623
+
+2014-06-01
+- toString updated to consider doc_as_upsert if sent an array source #622
+
+2014-05-27
+- Fix Aggragations/Filter to work with es v1.2.0 #619
+
+2014-05-25
+- Added Guzzle transport as an alternative to the default Http transport #618
+- Added Elastica\ScanAndScroll Iterator (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
+
 2014-05-13
-- Add JSON compat library; Elasticsearch JSON flags and nicer error handling
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614
 
 2014-05-12
 - Update dev builds to phpunit 4.1.*

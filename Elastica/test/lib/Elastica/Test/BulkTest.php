@@ -558,6 +558,26 @@ class BulkTest extends BaseTest
         $doc = $type->getDocument(6);
         $this->assertEquals('test', $doc->test);
 
+        //test doc_as_upsert with set of documents (use of addDocuments)
+        $doc1 = new \Elastica\Document(7, array('test' => 'test1'));
+        $doc1->setDocAsUpsert(true);
+        $doc2 = new \Elastica\Document(8, array('test' => 'test2'));
+        $doc2->setDocAsUpsert(true);
+        $docs = array($doc1, $doc2);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+        $doc = $type->getDocument(7);
+        $this->assertEquals('test1', $doc->test);
+        $doc = $type->getDocument(8);
+        $this->assertEquals('test2', $doc->test);
+
         //test updating via document with json string as data
         $doc3 = $type->createDocument(2);
         $bulk = new Bulk($client);
@@ -594,6 +614,36 @@ class BulkTest extends BaseTest
         $typeName = 'testType';
         $bulk->setType($typeName);
         $this->assertEquals($indexName . '/' . $typeName . '/_bulk', $bulk->getPath());
+    }
+
+    public function testRetry()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $doc1 = $type->createDocument(1, array('name' => 'Mister Fantastic'));
+        $doc1->setOpType(Action::OP_TYPE_UPDATE);
+        $doc1->setRetryOnConflict(5);
+
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc1);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
+
+        $script = new \Elastica\Script( '' );
+        $script->setRetryOnConflict(5);
+
+        $bulk = new Bulk($client);
+        $bulk->addScript($script);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
     }
 
     public function udpDataProvider()

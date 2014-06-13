@@ -263,7 +263,7 @@ class ClientTest extends BaseTest
         $data = array('username' => 'hans');
         $userSearch = 'username:hans';
 
-        $index = $this->_createIndex();
+        $index = $this->_createIndex('test', true, 2);
 
         // Create the index, deleting it first if it already exists
         $index->create(array(), true);
@@ -271,6 +271,7 @@ class ClientTest extends BaseTest
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
+        $doc->setRouting(1);
         $result = $type->addDocument($doc);
 
         // Refresh index
@@ -291,9 +292,21 @@ class ClientTest extends BaseTest
         $this->assertEquals(true, is_string($idxString));
         $this->assertEquals(true, is_string($typeString));
 
+        // Try to delete doc with a routing value which hashes to
+        // a different shard then the id.
+        $resp = $index->getClient()->deleteIds($ids, $index, $type, 2);
+
+        // Refresh the index
+        $index->refresh();
+
+        // Research the index to verify that the items are still there
+        $resultSet = $type->search($userSearch);
+        $totalHits = $resultSet->getTotalHits();
+        $this->assertEquals(1, $totalHits);
+
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type);
+        $resp = $index->getClient()->deleteIds($ids, $index, $type, 1);
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
