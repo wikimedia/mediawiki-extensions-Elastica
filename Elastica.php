@@ -77,6 +77,7 @@ $wgAutoloadClasses['Elastica\Cluster\Health\Shard'] = $elasticaDir . 'Cluster/He
 $wgAutoloadClasses['Elastica\Exception\BulkException'] = $elasticaDir . 'Exception/BulkException.php';
 $wgAutoloadClasses['Elastica\Exception\ClientException'] = $elasticaDir . 'Exception/ClientException.php';
 $wgAutoloadClasses['Elastica\Exception\ConnectionException'] = $elasticaDir . 'Exception/ConnectionException.php';
+$wgAutoloadClasses['Elastica\Exception\ElasticsearchException'] = $elasticaDir . 'Exception/ElasticsearchException.php';
 $wgAutoloadClasses['Elastica\Exception\ExceptionInterface'] = $elasticaDir . 'Exception/ExceptionInterface.php';
 $wgAutoloadClasses['Elastica\Exception\InvalidException'] = $elasticaDir . 'Exception/InvalidException.php';
 $wgAutoloadClasses['Elastica\Exception\JSONParseException'] = $elasticaDir . 'Exception/JSONParseException.php';
