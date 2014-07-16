@@ -33,6 +33,7 @@ $wgExtensionCredits['other'][] = array(
  */
 $dir = __DIR__ . '/';
 $wgAutoloadClasses['ElasticaConnection'] = $dir . 'ElasticaConnection.php';
+$wgAutoloadClasses['ElasticaHttpTransportCloser'] = $dir . 'ElasticaConnection.php';
 
 $elasticaDir = $dir . 'Elastica/lib/Elastica/';
 $wgAutoloadClasses['Elastica\AbstractUpdateAction'] = $elasticaDir . 'AbstractUpdateAction.php';
