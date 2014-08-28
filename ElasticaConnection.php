@@ -76,8 +76,24 @@ abstract class ElasticaConnection {
 					// We only want to try to reconnect on http connection errors
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
-					if ( !( $e instanceof \Elastica\Exception\Connection\HttpException ) ||
-							$e->getError() !== CURLE_COULDNT_CONNECT ) {
+					if ( !( $e instanceof \Elastica\Exception\Connection\HttpException ) ) {
+						wfLogWarning( 'Unknown connection exception communicating with Elasticsearch:  ' .
+							get_class( $e ) );
+						// This leaves the connection disabled.
+						return;
+					}
+					if ( $e->getError() === CURLE_OPERATION_TIMEDOUT ) {
+						// Timeouts shouldn't disable the connection and should always be thrown
+						// back to the caller so they can catch it and handle it.  They should
+						// never be retried blindly.
+						$connection->setEnabled( true );
+						throw $e;
+					}
+					if ( $e->getError() !== CURLE_COULDNT_CONNECT ) {
+						wfLogWarning( 'Unexpected connection error communicating with Elasticsearch.  Curl code:  ' .
+							$e->getError() );
+						// This also leaves the connection disabled but at least we have a log of
+						// what happened.
 						return;
 					}
 					// Keep track of the number of times we've hit a host
