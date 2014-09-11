@@ -25,7 +25,7 @@ $wgExtensionCredits['other'][] = array(
 	'author'         => array( 'Nik Everett', 'Chad Horohoe' ),
 	'descriptionmsg' => 'elastica-desc',
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:Elastica',
-	'version'        => '1.0.1.2'
+	'version'        => '1.3.0.0'
 );
 
 /**
@@ -63,6 +63,7 @@ $wgAutoloadClasses['Elastica\Status'] = $elasticaDir . 'Status.php';
 $wgAutoloadClasses['Elastica\Type'] = $elasticaDir . 'Type.php';
 $wgAutoloadClasses['Elastica\Util'] = $elasticaDir . 'Util.php';
 $wgAutoloadClasses['Elastica\Aggregation\Cardinality'] = $elasticaDir . 'Aggregation/Cardinality.php';
+$wgAutoloadClasses['Elastica\Aggregation\ReverseNested'] = $elasticaDir . 'Aggregation/ReverseNested.php';
 $wgAutoloadClasses['Elastica\Bulk\Action'] = $elasticaDir . 'Bulk/Action.php';
 $wgAutoloadClasses['Elastica\Bulk\Response'] = $elasticaDir . 'Bulk/Response.php';
 $wgAutoloadClasses['Elastica\Bulk\ResponseSet'] = $elasticaDir . 'Bulk/ResponseSet.php';
