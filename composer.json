@@ -1,0 +1,17 @@
+{
+	"name": "mediawiki/elastica",
+	"description": "Provides the elastica library and a connection layer as a MediaWiki extension",
+	"homepage": "https://www.mediawiki.org/wiki/Extension:Elastica",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Nik Everett"
+		},
+		{
+			"name": "Chad Horohoe"
+		}
+	],
+	"require": {
+		"ruflin/elastica": "1.3.0.0"
+	}
+}
