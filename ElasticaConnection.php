@@ -54,13 +54,14 @@ abstract class ElasticaConnection {
 
 	/**
 	 * Fetch a connection.
+	 * @param array $options Passed to the constructor when creating the singleton.
 	 * @return \Elastica\Client
 	 */
-	public static function getClient() {
+	public static function getClient( $options = null ) {
 		if ( self::$client === null ) {
 			// Setup the Elastica servers
 			$servers = array();
-			$me = new static();
+			$me = new static( $options );
 			foreach ( $me->getServerList() as $server ) {
 				$servers[] = array( 'host' => $server );
 			}
