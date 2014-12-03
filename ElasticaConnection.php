@@ -20,10 +20,25 @@
  */
 abstract class ElasticaConnection {
 	/**
-	 * Singleton instance of the client
 	 * @var \Elastica\Client
 	 */
-	private static $client = null;
+	protected $client;
+
+	protected function __construct() {
+		// This is a singleton
+	}
+
+	/**
+	 * @return static
+	 */
+	public static function getSingleton() {
+		static $instance;
+		if ( !$instance ) {
+			$instance = new static;
+		}
+
+		return $instance;
+	}
 
 	/**
 	 * @return array(string) server ips or hostnames
@@ -43,8 +58,8 @@ abstract class ElasticaConnection {
 	 * Set the client side timeout to be used for the rest of this process.
 	 * @param int $timeout timeout in seconds
 	 */
-	public static function setTimeout( $timeout ) {
-		$client = self::getClient();
+	public function setTimeout2( $timeout ) {
+		$client = $this->getClient2();
 		// Set the timeout for new connections
 		$client->setConfigValue( 'timeout', $timeout );
 		foreach ( $client->getConnections() as $connection ) {
@@ -54,26 +69,25 @@ abstract class ElasticaConnection {
 
 	/**
 	 * Fetch a connection.
-	 * @param array $options Passed to the constructor when creating the singleton.
 	 * @return \Elastica\Client
 	 */
-	public static function getClient( $options = null ) {
-		if ( self::$client === null ) {
+	public function getClient2() {
+		if ( $this->client === null ) {
 			// Setup the Elastica servers
 			$servers = array();
-			$me = new static( $options );
-			foreach ( $me->getServerList() as $server ) {
+			foreach ( $this->getServerList() as $server ) {
 				$servers[] = array( 'host' => $server );
 			}
 
-			self::$client = new \Elastica\Client( array( 'servers' => $servers ),
+			$self = $this;
+			$this->client = new \Elastica\Client( array( 'servers' => $servers ),
 				/**
 				 * Callback for \Elastica\Client on request failures.
 				 * @param \Elastica\Connection $connection The current connection to elasticasearch
 				 * @param \Elastica\Exception $e Exception to be thrown if we don't do anything
-				 * @param \ElasticaConnection $me Child class of us
+				 * @param \ElasticaConnection $self This class
 				 */
-				function( $connection, $e ) use ( $me ) {
+				function( $connection, $e ) use ( $self ) {
 					// We only want to try to reconnect on http connection errors
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
@@ -104,7 +118,7 @@ abstract class ElasticaConnection {
 						? $connectionAttempts[ $host ] + 1 : 1;
 
 					// Check if we've hit the host the max # of times. If not, try again
-					if ( $connectionAttempts[ $host ] < $me->getMaxConnectionAttempts() ) {
+					if ( $connectionAttempts[ $host ] < $self->getMaxConnectionAttempts() ) {
 						wfLogWarning( "Retrying connection to $host after " . $connectionAttempts[ $host ] .
 							' attempts.' );
 						$connection->setEnabled( true );
@@ -113,7 +127,7 @@ abstract class ElasticaConnection {
 			);
 		}
 
-		return self::$client;
+		return $this->client;
 	}
 
 	/**
@@ -123,8 +137,8 @@ abstract class ElasticaConnection {
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return \Elastica\Index
 	 */
-	public static function getIndex( $name, $type = false, $identifier = false ) {
-		return self::getClient()->getIndex( self::getIndexName( $name, $type, $identifier ) );
+	public function getIndex2( $name, $type = false, $identifier = false ) {
+		return $this->getClient2()->getIndex( $this->getIndexName2( $name, $type, $identifier ) );
 	}
 
 	/**
@@ -134,7 +148,7 @@ abstract class ElasticaConnection {
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return string name of index for $type and $identifier
 	 */
-	public static function getIndexName( $name, $type = false, $identifier = false ) {
+	public function getIndexName2( $name, $type = false, $identifier = false ) {
 		if ( $type ) {
 			$name .= '_' . $type;
 		}
@@ -144,9 +158,46 @@ abstract class ElasticaConnection {
 		return $name;
 	}
 
-	public static function destroySingleton() {
-		self::$client = null;
+	public function destroyClient() {
+		$this->client = null;
 		ElasticaHttpTransportCloser::destroySingleton();
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static function setTimeout( $timeout ) {
+		static::getSingleton()->setTimeout2( $timeout );
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static function getClient() {
+		// This method used to have an optional argument $options, which was
+		// unused and confusing
+		return static::getSingleton()->getClient2();
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static function getIndex( $name, $type = false, $identifier = false ) {
+		return static::getSingleton()->getIndex2( $name, $type, $identifier );
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static function getIndexName( $name, $type = false, $identifier = false ) {
+		return static::getSingleton()->getIndexName2( $name, $type, $identifier );
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static function destroySingleton() {
+		static::getSingleton()->destroyClient();
 	}
 }
 
