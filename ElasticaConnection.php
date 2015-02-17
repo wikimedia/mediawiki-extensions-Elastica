@@ -97,7 +97,7 @@ abstract class ElasticaConnection {
 						// This leaves the connection disabled.
 						return;
 					}
-					if ( $e->getError() === CURLE_OPERATION_TIMEDOUT ) {
+					if ( $e->getError() === CURLE_OPERATION_TIMEOUTED ) {
 						// Timeouts shouldn't disable the connection and should always be thrown
 						// back to the caller so they can catch it and handle it.  They should
 						// never be retried blindly.
