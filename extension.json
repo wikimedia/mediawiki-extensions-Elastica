@@ -1,0 +1,22 @@
+{
+	"name": "Elastica",
+	"version": "1.3.0.0",
+	"author": [
+		"Nik Everett",
+		"Chad Horohoe"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Elastica",
+	"descriptionmsg": "elastica-desc",
+	"type": "other",
+	"MessagesDirs": {
+		"Elastica": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"ElasticaConnection": "ElasticaConnection.php",
+		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
+		"ElasticaHooks": "Elastica.hooks.php"
+	},
+	"callback": "ElasticaHooks::onRegistration"
+}

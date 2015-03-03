@@ -33,10 +33,9 @@ $wgExtensionCredits['other'][] = array(
  */
 $wgAutoloadClasses['ElasticaConnection'] = __DIR__ . '/ElasticaConnection.php';
 $wgAutoloadClasses['ElasticaHttpTransportCloser'] = __DIR__ . '/ElasticaConnection.php';
-if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php';
-}
+$wgAutoloadClasses['ElasticaHooks'] = __DIR__ . '/Elastica.hooks.php';
 
+ElasticaHooks::onRegistration();
 /**
  * i18n
  */
