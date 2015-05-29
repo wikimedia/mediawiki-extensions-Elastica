@@ -18,5 +18,6 @@
 		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
 		"ElasticaHooks": "Elastica.hooks.php"
 	},
-	"callback": "ElasticaHooks::onRegistration"
+	"callback": "ElasticaHooks::onRegistration",
+	"manifest_version": 1
 }
