@@ -76,7 +76,11 @@ abstract class ElasticaConnection {
 			// Setup the Elastica servers
 			$servers = array();
 			foreach ( $this->getServerList() as $server ) {
-				$servers[] = array( 'host' => $server );
+				if ( is_array( $server ) ) {
+					$servers[] = $server;
+				} else {
+					$servers[] = array( 'host' => $server );
+				}
 			}
 
 			$self = $this;
