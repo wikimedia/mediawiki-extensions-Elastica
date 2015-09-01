@@ -24,22 +24,6 @@ abstract class ElasticaConnection {
 	 */
 	protected $client;
 
-	protected function __construct() {
-		// This is a singleton
-	}
-
-	/**
-	 * @return static
-	 */
-	public static function getSingleton() {
-		static $instance;
-		if ( !$instance ) {
-			$instance = new static;
-		}
-
-		return $instance;
-	}
-
 	/**
 	 * @return array(string) server ips or hostnames
 	 */
@@ -58,8 +42,8 @@ abstract class ElasticaConnection {
 	 * Set the client side timeout to be used for the rest of this process.
 	 * @param int $timeout timeout in seconds
 	 */
-	public function setTimeout2( $timeout ) {
-		$client = $this->getClient2();
+	public function setTimeout( $timeout ) {
+		$client = $this->getClient();
 		// Set the timeout for new connections
 		$client->setConfigValue( 'timeout', $timeout );
 		foreach ( $client->getConnections() as $connection ) {
@@ -71,7 +55,7 @@ abstract class ElasticaConnection {
 	 * Fetch a connection.
 	 * @return \Elastica\Client
 	 */
-	public function getClient2() {
+	public function getClient() {
 		if ( $this->client === null ) {
 			// Setup the Elastica servers
 			$servers = array();
@@ -145,8 +129,8 @@ abstract class ElasticaConnection {
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return \Elastica\Index
 	 */
-	public function getIndex2( $name, $type = false, $identifier = false ) {
-		return $this->getClient2()->getIndex( $this->getIndexName2( $name, $type, $identifier ) );
+	public function getIndex( $name, $type = false, $identifier = false ) {
+		return $this->getClient()->getIndex( $this->getIndexName( $name, $type, $identifier ) );
 	}
 
 	/**
@@ -156,7 +140,7 @@ abstract class ElasticaConnection {
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return string name of index for $type and $identifier
 	 */
-	public function getIndexName2( $name, $type = false, $identifier = false ) {
+	public function getIndexName( $name, $type = false, $identifier = false ) {
 		if ( $type ) {
 			$name .= '_' . $type;
 		}
@@ -174,38 +158,38 @@ abstract class ElasticaConnection {
 	/**
 	 * @deprecated
 	 */
-	public static function setTimeout( $timeout ) {
-		static::getSingleton()->setTimeout2( $timeout );
+	public function setTimeout2( $timeout ) {
+		$this->setTimeout( $timeout );
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static function getClient() {
+	public function getClient2() {
 		// This method used to have an optional argument $options, which was
 		// unused and confusing
-		return static::getSingleton()->getClient2();
+		return $this->getClient();
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static function getIndex( $name, $type = false, $identifier = false ) {
-		return static::getSingleton()->getIndex2( $name, $type, $identifier );
+	public function getIndex2( $name, $type = false, $identifier = false ) {
+		return $this->getIndex( $name, $type, $identifier );
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static function getIndexName( $name, $type = false, $identifier = false ) {
-		return static::getSingleton()->getIndexName2( $name, $type, $identifier );
+	public function getIndexName2( $name, $type = false, $identifier = false ) {
+		return $this->getIndexName2( $name, $type, $identifier );
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static function destroySingleton() {
-		static::getSingleton()->destroyClient();
+	public function destroySingleton() {
+		$this->destroyClient();
 	}
 }
 
