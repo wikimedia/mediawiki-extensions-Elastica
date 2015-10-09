@@ -52,6 +52,19 @@ abstract class ElasticaConnection {
 	}
 
 	/**
+	 * Set the client side connect timeout to be used for the rest of this process.
+	 * @param int $timeout timeout in seconds
+	 */
+	public function setConnectTimeout( $timeout ) {
+		$client = $this->getClient();
+		// Set the timeout for new connections
+		$client->setConfigValue( 'connectTimeout', $timeout );
+		foreach ( $client->getConnections() as $connection ) {
+			$connection->setConnectTimeout( $timeout );
+		}
+	}
+
+	/**
 	 * Fetch a connection.
 	 * @return \Elastica\Client
 	 */
