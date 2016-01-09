@@ -19,25 +19,15 @@
  * http://www.gnu.org/copyleft/gpl.html
  */
 
-$wgExtensionCredits['other'][] = array(
-	'path'           => __FILE__,
-	'name'           => 'Elastica',
-	'author'         => array( 'Nik Everett', 'Chad Horohoe' ),
-	'descriptionmsg' => 'elastica-desc',
-	'url'            => 'https://www.mediawiki.org/wiki/Extension:Elastica',
-	'version'        => '1.3.0.0'
-);
-
-/**
- * Classes
- */
-$wgAutoloadClasses['ElasticaConnection'] = __DIR__ . '/ElasticaConnection.php';
-$wgAutoloadClasses['ElasticaHttpTransportCloser'] = __DIR__ . '/ElasticaConnection.php';
-$wgAutoloadClasses['ElasticaHooks'] = __DIR__ . '/Elastica.hooks.php';
-
-ElasticaHooks::onRegistration();
-/**
- * i18n
- */
-$wgMessagesDirs['Elastica'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['Elastica'] = __DIR__ . '/Elastica.i18n.php';
+if ( function_exists( 'wfLoadExtension' ) ) {
+	wfLoadExtension( 'Elastica' );
+	// Keep i18n globals so mergeMessageFileList.php doesn't break
+	$wgMessagesDirs['Elastica'] = __DIR__ . '/i18n';
+	/* wfWarn(
+		'Deprecated PHP entry point used for Elastica extension. Please use wfLoadExtension instead, ' .
+		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	); */
+	return true;
+} else {
+	die( 'This version of the Elastica extension requires MediaWiki 1.25+' );
+}
