@@ -8,6 +8,9 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:Elastica",
 	"descriptionmsg": "elastica-desc",
 	"type": "other",
+	"require": {
+		"MediaWiki": ">= 1.27"
+	},
 	"MessagesDirs": {
 		"Elastica": [
 			"i18n"
@@ -15,9 +18,8 @@
 	},
 	"AutoloadClasses": {
 		"ElasticaConnection": "ElasticaConnection.php",
-		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
-		"ElasticaHooks": "Elastica.hooks.php"
+		"ElasticaHttpTransportCloser": "ElasticaConnection.php"
 	},
-	"callback": "ElasticaHooks::onRegistration",
+	"load_composer_autoloader": true,
 	"manifest_version": 1
 }
