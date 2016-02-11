@@ -71,28 +71,26 @@ abstract class ElasticaConnection {
 	public function getClient() {
 		if ( $this->client === null ) {
 			// Setup the Elastica servers
-			$servers = array();
+			$servers = [];
 			$serverList = $this->getServerList();
 			if ( !is_array( $serverList ) ) {
-				$serverList = array( $serverList );
+				$serverList = [ $serverList ];
 			}
 			foreach ( $serverList as $server ) {
 				if ( is_array( $server ) ) {
 					$servers[] = $server;
 				} else {
-					$servers[] = array( 'host' => $server );
+					$servers[] = [ 'host' => $server ];
 				}
 			}
 
-			$self = $this;
-			$this->client = new \Elastica\Client( array( 'servers' => $servers ),
+			$this->client = new \Elastica\Client( [ 'servers' => $servers ],
 				/**
 				 * Callback for \Elastica\Client on request failures.
 				 * @param \Elastica\Connection $connection The current connection to elasticasearch
 				 * @param \Elastica\Exception $e Exception to be thrown if we don't do anything
-				 * @param \ElasticaConnection $self This class
 				 */
-				function( $connection, $e ) use ( $self ) {
+				function( $connection, $e ) {
 					// We only want to try to reconnect on http connection errors
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
@@ -117,13 +115,13 @@ abstract class ElasticaConnection {
 						return;
 					}
 					// Keep track of the number of times we've hit a host
-					static $connectionAttempts = array();
+					static $connectionAttempts = [];
 					$host = $connection->getParam( 'host' );
 					$connectionAttempts[ $host ] = isset( $connectionAttempts[ $host ] )
 						? $connectionAttempts[ $host ] + 1 : 1;
 
 					// Check if we've hit the host the max # of times. If not, try again
-					if ( $connectionAttempts[ $host ] < $self->getMaxConnectionAttempts() ) {
+					if ( $connectionAttempts[ $host ] < $this->getMaxConnectionAttempts() ) {
 						wfLogWarning( "Retrying connection to $host after " . $connectionAttempts[ $host ] .
 							' attempts.' );
 						$connection->setEnabled( true );

@@ -12,6 +12,7 @@
 		}
 	],
 	"require": {
+		"php": ">=5.5.9",
 		"ruflin/elastica": "2.2.1"
 	}
 }
