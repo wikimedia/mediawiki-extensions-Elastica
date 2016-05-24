@@ -7,6 +7,7 @@
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:Elastica",
 	"descriptionmsg": "elastica-desc",
+	"license-name": "GPL-2.0+",
 	"type": "other",
 	"require": {
 		"MediaWiki": ">= 1.27"
@@ -17,8 +18,15 @@
 		]
 	},
 	"AutoloadClasses": {
+		"ElasticaHooks" : "ElasticaHooks.php",
 		"ElasticaConnection": "ElasticaConnection.php",
-		"ElasticaHttpTransportCloser": "ElasticaConnection.php"
+		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
+		"MWElasticUtils": "ElasticaConnection.php"
+	},
+	"Hooks": {
+		"UnitTestsList": [
+			"ElasticaHooks::getUnitTestsList"
+		]
 	},
 	"load_composer_autoloader": true,
 	"manifest_version": 1
