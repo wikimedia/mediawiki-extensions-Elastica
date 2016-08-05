@@ -18,15 +18,9 @@
 		]
 	},
 	"AutoloadClasses": {
-		"ElasticaHooks" : "ElasticaHooks.php",
 		"ElasticaConnection": "ElasticaConnection.php",
 		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
 		"MWElasticUtils": "ElasticaConnection.php"
-	},
-	"Hooks": {
-		"UnitTestsList": [
-			"ElasticaHooks::getUnitTestsList"
-		]
 	},
 	"load_composer_autoloader": true,
 	"manifest_version": 1
