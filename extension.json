@@ -9,7 +9,7 @@
 	"descriptionmsg": "elastica-desc",
 	"license-name": "GPL-2.0+",
 	"type": "other",
-	"require": {
+	"requires": {
 		"MediaWiki": ">= 1.27"
 	},
 	"MessagesDirs": {
