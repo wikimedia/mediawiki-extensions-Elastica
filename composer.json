@@ -13,6 +13,6 @@
 	],
 	"require": {
 		"php": ">=5.5.9",
-		"ruflin/elastica": "5.0.0"
+		"ruflin/elastica": "5.1.0"
 	}
 }
