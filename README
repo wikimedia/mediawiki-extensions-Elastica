@@ -43,7 +43,7 @@ Make sure you have the curl php library installed (sudo apt-get install
 php5-curl in Debian.)
 Fetch the elastica library by running "composer install".
 Add this to LocalSettings.php:
- require_once( "$IP/extensions/Elastica/Elastica.php" );
+ wfLoadExtension( 'Elastica' );
 
 
 Licensing information
