@@ -11,6 +11,32 @@
 			"name": "Chad Horohoe"
 		}
 	],
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "ruflin/elastica",
+				"version": "5.1.0",
+				"dist": {
+					"url": "https://github.com/ruflin/Elastica/archive/5.1.0.zip",
+					"type": "zip"
+				},
+				"source": {
+					"url": "https://github.com/ruflin/Elastica.git",
+					"type": "git",
+					"reference": "tags/5.1.0"
+				},
+				"autoload": {
+					"psr-4": {
+						"Elastica\\": "lib/Elastica/"
+					}
+				},
+				"require": {
+					"php": ">=5.5.0"
+				}
+			}
+		}
+	],
 	"require": {
 		"php": ">=5.5.9",
 		"ruflin/elastica": "5.1.0"
