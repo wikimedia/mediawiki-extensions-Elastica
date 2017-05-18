@@ -27,7 +27,7 @@ abstract class ElasticaConnection {
 	/**
 	 * @return array(string) server ips or hostnames
 	 */
-	public abstract function getServerList();
+	abstract public function getServerList();
 
 	/**
 	 * How many times can we attempt to connect per host?
@@ -210,7 +210,6 @@ class ElasticaHttpTransportCloser extends \Elastica\Transport\Http {
 	}
 }
 
-
 /**
  * Utility class
  */
@@ -226,22 +225,24 @@ class MWElasticUtils {
 	 * @param int $retryAttempts the number of times we retry
 	 * @param callable $retryErrorCallback function called before each retries
 	 */
-	public static function iterateOverScroll( \Elastica\Index $index, $scrollId, $scrollTime, $consumer, $limit = 0, $retryAttempts = 0, $retryErrorCallback = null ) {
+	public static function iterateOverScroll( \Elastica\Index $index, $scrollId, $scrollTime,
+		$consumer, $limit = 0, $retryAttempts = 0, $retryErrorCallback = null
+	) {
 		$clearScroll = true;
 		$fetched = 0;
 
-		while( true ) {
+		while ( true ) {
 			$result = static::withRetry( $retryAttempts,
 				function() use ( $index, $scrollId, $scrollTime ) {
-					return $index->search ( array(), array(
+					return $index->search( [], [
 						'scroll_id' => $scrollId,
 						'scroll' => $scrollTime
-					) );
+					] );
 				}, $retryErrorCallback );
 
 			$scrollId = $result->getResponse()->getScrollId();
 
-			if( !$result->count() ) {
+			if ( !$result->count() ) {
 				// No need to clear scroll on the last call
 				$clearScroll = false;
 				break;
@@ -250,21 +251,22 @@ class MWElasticUtils {
 			$fetched += $result->count();
 			$results =  $result->getResults();
 
-			if( $limit > 0 && $fetched > $limit ) {
-				$results = array_slice( $results, 0, sizeof( $results ) - ( $fetched - $limit ) );
+			if ( $limit > 0 && $fetched > $limit ) {
+				$results = array_slice( $results, 0, count( $results ) - ( $fetched - $limit ) );
 			}
 			$consumer( $results );
 
-			if( $limit > 0 && $fetched >= $limit ) {
+			if ( $limit > 0 && $fetched >= $limit ) {
 				break;
 			}
 		}
 		// @todo: catch errors and clear the scroll, it'd be easy with a finally block ...
 
-		if( $clearScroll ) {
+		if ( $clearScroll ) {
 			try {
 				$index->getClient()->request( "_search/scroll/".$scrollId, \Elastica\Request::DELETE );
-			} catch ( Exception $e ) {}
+			} catch ( Exception $e ) {
+			}
 		}
 	}
 
@@ -289,7 +291,7 @@ class MWElasticUtils {
 					return $func();
 				} catch ( Exception $e ) {
 					$errors += 1;
-					if( $beforeRetry ) {
+					if ( $beforeRetry ) {
 						$beforeRetry( $e, $errors );
 					} else {
 						$seconds = static::backoffDelay( $errors );

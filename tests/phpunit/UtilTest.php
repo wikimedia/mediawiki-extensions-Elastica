@@ -22,27 +22,29 @@ use Elastica\Exception\InvalidException;
  */
 
 class UtilTest extends MediaWikiTestCase {
-        public function testBackoffDelay() {
-                for ( $i = 0; $i < 100; $i++ ) {
-                        $this->assertLessThanOrEqual( 16, MWElasticUtils::backoffDelay( 1 ) );
-                        $this->assertLessThanOrEqual( 256, MWElasticUtils::backoffDelay( 5 ) );
-                }
-        }
+	public function testBackoffDelay() {
+		for ( $i = 0; $i < 100; $i++ ) {
+			$this->assertLessThanOrEqual( 16, MWElasticUtils::backoffDelay( 1 ) );
+			$this->assertLessThanOrEqual( 256, MWElasticUtils::backoffDelay( 5 ) );
+		}
+	}
 
-        public function testWithRetry() {
-                $calls = 0;
-                $func = function() use ( &$calls ) {
-                        $calls++;
-                        if( $calls <= 5 ) {
-                                throw new InvalidException();
-                        }
-                };
-                $errorCallbackCalls = 0;
-                MWElasticUtils::withRetry( 5, $func, function ($e, $errCount) use ( &$errorCallbackCalls ) {
-                        $errorCallbackCalls++;
-                        $this->assertEquals( "Elastica\Exception\InvalidException", get_class( $e ) );
-                } );
-                $this->assertEquals( 6, $calls );
-                $this->assertEquals( 5, $errorCallbackCalls );
-        }
+	public function testWithRetry() {
+		$calls = 0;
+		$func = function() use ( &$calls ) {
+			$calls++;
+			if ( $calls <= 5 ) {
+				throw new InvalidException();
+			}
+		};
+		$errorCallbackCalls = 0;
+		MWElasticUtils::withRetry( 5, $func,
+			function( $e, $errCount ) use ( &$errorCallbackCalls ) {
+				$errorCallbackCalls++;
+				$this->assertEquals( "Elastica\Exception\InvalidException", get_class( $e ) );
+			}
+		);
+		$this->assertEquals( 6, $calls );
+		$this->assertEquals( 5, $errorCallbackCalls );
+	}
 }
