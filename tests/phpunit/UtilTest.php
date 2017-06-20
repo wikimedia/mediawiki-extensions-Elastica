@@ -31,7 +31,7 @@ class UtilTest extends MediaWikiTestCase {
 
 	public function testWithRetry() {
 		$calls = 0;
-		$func = function() use ( &$calls ) {
+		$func = function () use ( &$calls ) {
 			$calls++;
 			if ( $calls <= 5 ) {
 				throw new InvalidException();
@@ -39,7 +39,7 @@ class UtilTest extends MediaWikiTestCase {
 		};
 		$errorCallbackCalls = 0;
 		MWElasticUtils::withRetry( 5, $func,
-			function( $e, $errCount ) use ( &$errorCallbackCalls ) {
+			function ( $e, $errCount ) use ( &$errorCallbackCalls ) {
 				$errorCallbackCalls++;
 				$this->assertEquals( "Elastica\Exception\InvalidException", get_class( $e ) );
 			}

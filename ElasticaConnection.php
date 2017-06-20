@@ -90,7 +90,7 @@ abstract class ElasticaConnection {
 				 * @param \Elastica\Connection $connection The current connection to elasticasearch
 				 * @param \Elastica\Exception $e Exception to be thrown if we don't do anything
 				 */
-				function( $connection, $e ) {
+				function ( $connection, $e ) {
 					// We only want to try to reconnect on http connection errors
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
@@ -233,7 +233,7 @@ class MWElasticUtils {
 
 		while ( true ) {
 			$result = static::withRetry( $retryAttempts,
-				function() use ( $index, $scrollId, $scrollTime ) {
+				function () use ( $index, $scrollId, $scrollTime ) {
 					return $index->search( [], [
 						'scroll_id' => $scrollId,
 						'scroll' => $scrollTime
@@ -312,6 +312,6 @@ class MWElasticUtils {
 	 * @return int
 	 */
 	public static function backoffDelay( $errorCount ) {
-		return rand( 1, (int) pow( 2, 3 + $errorCount ) );
+		return rand( 1, (int)pow( 2, 3 + $errorCount ) );
 	}
 }
