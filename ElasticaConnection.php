@@ -249,7 +249,7 @@ class MWElasticUtils {
 			}
 
 			$fetched += $result->count();
-			$results =  $result->getResults();
+			$results = $result->getResults();
 
 			if ( $limit > 0 && $fetched > $limit ) {
 				$results = array_slice( $results, 0, count( $results ) - ( $fetched - $limit ) );
