@@ -136,7 +136,7 @@ abstract class ElasticaConnection {
 	/**
 	 * Fetch the Elastica Index.
 	 * @param string $name get the index(es) with this basename
-	 * @param mixed $type type of index (named type or false to get all)
+	 * @param string|bool $type type of index (named type or false to get all)
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return \Elastica\Index
 	 */
@@ -147,7 +147,7 @@ abstract class ElasticaConnection {
 	/**
 	 * Get the name of the index.
 	 * @param string $name get the index(es) with this basename
-	 * @param mixed $type type of index (named type or false to get all)
+	 * @param string|bool $type type of index (named type or false to get all)
 	 * @param mixed $identifier if specified get the named identifier of the index
 	 * @return string name of index for $type and $identifier
 	 */
