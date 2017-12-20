@@ -64,7 +64,8 @@
 	],
 	"require": {
 		"php": ">=5.5.9",
-		"ruflin/elastica": "5.3.0"
+		"ruflin/elastica": "5.3.0",
+		"ext-curl": "*"
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "0.9.2",
