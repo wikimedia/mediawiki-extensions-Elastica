@@ -18,10 +18,12 @@
 		]
 	},
 	"AutoloadClasses": {
+		"ElasticaHooks": "Elastica.hooks.php",
 		"ElasticaConnection": "ElasticaConnection.php",
 		"ElasticaHttpTransportCloser": "ElasticaConnection.php",
 		"MWElasticUtils": "ElasticaConnection.php"
 	},
+	"callback": "ElasticaHooks::checkInstalledCurl",
 	"load_composer_autoloader": true,
 	"manifest_version": 1
 }
