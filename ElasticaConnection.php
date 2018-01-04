@@ -214,61 +214,6 @@ class ElasticaHttpTransportCloser extends \Elastica\Transport\Http {
  * Utility class
  */
 class MWElasticUtils {
-	/**
-	 * Iterate over a scroll.
-	 *
-	 * @param \Elastica\Index $index
-	 * @param string $scrollId the initial $scrollId
-	 * @param string $scrollTime the scroll timeout
-	 * @param callable $consumer function that receives the results
-	 * @param int $limit the max number of results to fetch (0: no limit)
-	 * @param int $retryAttempts the number of times we retry
-	 * @param callable $retryErrorCallback function called before each retries
-	 */
-	public static function iterateOverScroll( \Elastica\Index $index, $scrollId, $scrollTime,
-		$consumer, $limit = 0, $retryAttempts = 0, $retryErrorCallback = null
-	) {
-		$clearScroll = true;
-		$fetched = 0;
-
-		while ( true ) {
-			$result = static::withRetry( $retryAttempts,
-				function () use ( $index, $scrollId, $scrollTime ) {
-					return $index->search( [], [
-						'scroll_id' => $scrollId,
-						'scroll' => $scrollTime
-					] );
-				}, $retryErrorCallback );
-
-			$scrollId = $result->getResponse()->getScrollId();
-
-			if ( !$result->count() ) {
-				// No need to clear scroll on the last call
-				$clearScroll = false;
-				break;
-			}
-
-			$fetched += $result->count();
-			$results = $result->getResults();
-
-			if ( $limit > 0 && $fetched > $limit ) {
-				$results = array_slice( $results, 0, count( $results ) - ( $fetched - $limit ) );
-			}
-			$consumer( $results );
-
-			if ( $limit > 0 && $fetched >= $limit ) {
-				break;
-			}
-		}
-		// @todo: catch errors and clear the scroll, it'd be easy with a finally block ...
-
-		if ( $clearScroll ) {
-			try {
-				$index->getClient()->request( "_search/scroll/".$scrollId, \Elastica\Request::DELETE );
-			} catch ( Exception $e ) {
-			}
-		}
-	}
 
 	/**
 	 * A function that retries callback $func if it throws an exception.
