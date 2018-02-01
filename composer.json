@@ -2,7 +2,7 @@
 	"name": "mediawiki/elastica",
 	"description": "Provides the elastica library and a connection layer as a MediaWiki extension",
 	"homepage": "https://www.mediawiki.org/wiki/Extension:Elastica",
-	"license": "GPL-2.0+",
+	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
 			"name": "Nik Everett"
