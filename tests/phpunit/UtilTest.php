@@ -21,6 +21,9 @@ use Elastica\Exception\InvalidException;
  * http://www.gnu.org/copyleft/gpl.html
  */
 
+/**
+ * @covers MWElasticUtils
+ */
 class UtilTest extends MediaWikiTestCase {
 	public function testBackoffDelay() {
 		for ( $i = 0; $i < 100; $i++ ) {
