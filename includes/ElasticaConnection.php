@@ -25,7 +25,7 @@ abstract class ElasticaConnection {
 	protected $client;
 
 	/**
-	 * @return array(string) server ips or hostnames
+	 * @return string[] server ips or hostnames
 	 */
 	abstract public function getServerList();
 
