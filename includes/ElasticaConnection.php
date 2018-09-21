@@ -173,41 +173,4 @@ abstract class ElasticaConnection {
 		$this->client = null;
 		ElasticaHttpTransportCloser::destroySingleton();
 	}
-
-	/**
-	 * @deprecated
-	 */
-	public function setTimeout2( $timeout ) {
-		$this->setTimeout( $timeout );
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public function getClient2() {
-		// This method used to have an optional argument $options, which was
-		// unused and confusing
-		return $this->getClient();
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public function getIndex2( $name, $type = false, $identifier = false ) {
-		return $this->getIndex( $name, $type, $identifier );
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public function getIndexName2( $name, $type = false, $identifier = false ) {
-		return $this->getIndexName2( $name, $type, $identifier );
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public function destroySingleton() {
-		$this->destroyClient();
-	}
 }
