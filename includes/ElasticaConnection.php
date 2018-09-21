@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\Logger\LoggerFactory;
+
 /**
  * Forms and caches connection to Elasticsearch as well as client objects
  * that contain connection information like \Elastica\Index and \Elastica\Type.
@@ -95,9 +98,9 @@ abstract class ElasticaConnection {
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
 					if ( !( $e instanceof \Elastica\Exception\Connection\HttpException ) ) {
-						wfLogWarning( 'Unknown connection exception communicating with Elasticsearch:  ' .
-							get_class( $e ) );
-						// This leaves the connection disabled.
+						LoggerFactory::getInstance( 'Elastica' )
+							->error( 'Unknown connection exception communicating with Elasticsearch: {class_name}',
+								[ 'class_name' => get_class( $e ) ] );
 						return;
 					}
 					if ( $e->getError() === CURLE_OPERATION_TIMEOUTED ) {
@@ -108,8 +111,9 @@ abstract class ElasticaConnection {
 						throw $e;
 					}
 					if ( $e->getError() !== CURLE_COULDNT_CONNECT ) {
-						wfLogWarning( 'Unexpected connection error communicating with Elasticsearch.  Curl code:  ' .
-							$e->getError() );
+						LoggerFactory::getInstance( 'Elastica' )
+							->error( 'Unexpected connection error communicating with Elasticsearch. ' .
+								'Curl code: {curl_code}', [ 'curl_code' => $e->getError() ] );
 						// This also leaves the connection disabled but at least we have a log of
 						// what happened.
 						return;
@@ -122,8 +126,12 @@ abstract class ElasticaConnection {
 
 					// Check if we've hit the host the max # of times. If not, try again
 					if ( $connectionAttempts[ $host ] < $this->getMaxConnectionAttempts() ) {
-						wfLogWarning( "Retrying connection to $host after " . $connectionAttempts[ $host ] .
-							' attempts.' );
+						LoggerFactory::getInstance( 'Elastica' )
+							->info( "Retrying connection to {elastic_host} after {attempts} attempts",
+								[
+									'elastic_host' => $host,
+									'attempts' => $connectionAttempts[ $host ],
+								] );
 						$connection->setEnabled( true );
 					}
 				}
