@@ -91,7 +91,7 @@ abstract class ElasticaConnection {
 				/**
 				 * Callback for \Elastica\Client on request failures.
 				 * @param \Elastica\Connection $connection The current connection to elasticasearch
-				 * @param \Elastica\Exception $e Exception to be thrown if we don't do anything
+				 * @param \Exception $e Exception to be thrown if we don't do anything
 				 */
 				function ( $connection, $e ) {
 					// We only want to try to reconnect on http connection errors
