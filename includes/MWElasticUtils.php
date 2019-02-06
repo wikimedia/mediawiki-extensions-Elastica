@@ -1,4 +1,7 @@
 <?php
+
+use Elastica\Client;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,5 +67,50 @@ class MWElasticUtils {
 	 */
 	public static function backoffDelay( $errorCount ) {
 		return rand( 1, (int)pow( 2, 3 + $errorCount ) );
+	}
+
+	/**
+	 * Get index health
+	 *
+	 * @param Client $client
+	 * @param string $indexName
+	 * @return array the index health status
+	 */
+	public static function getIndexHealth( Client $client, $indexName ) {
+		$endpoint = new \Elasticsearch\Endpoints\Cluster\Health;
+		$endpoint->setIndex( $indexName );
+		$response = $client->requestEndpoint( $endpoint );
+		if ( $response->hasError() ) {
+			throw new \Exception( "Error while fetching index health status: ". $response->getError() );
+		}
+		return $response->getData();
+	}
+
+	/**
+	 * Wait for the index to go green
+	 *
+	 * @param Client $client
+	 * @param string $indexName Name of index to wait for
+	 * @param int $timeout In seconds
+	 * @yield string status messages
+	 * @return \Generator|bool true if the index is green false otherwise.
+	 */
+	public static function waitForGreen( Client $client, $indexName, $timeout ) {
+		$startTime = time();
+		while ( ( $startTime + $timeout ) > time() ) {
+			try {
+				$response = self::getIndexHealth( $client, $indexName );
+				$status = $response['status'] ?? 'unknown';
+				if ( $status === 'green' ) {
+					yield "\tGreen!";
+					return true;
+				}
+				yield "\tIndex is $status retrying...";
+				sleep( 5 );
+			} catch ( \Exception $e ) {
+				yield "Error while waiting for green ({$e->getMessage()}), retrying...";
+			}
+		}
+		return false;
 	}
 }
