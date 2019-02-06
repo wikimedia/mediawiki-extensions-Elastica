@@ -113,4 +113,58 @@ class MWElasticUtils {
 		}
 		return false;
 	}
+
+	/**
+	 * Delete docs by query and wait for it to complete
+	 * via tasks api.
+	 *
+	 * @param \Elastica\Index $index the source index
+	 * @param \Elastica\Query $query the query
+	 * @yield array task status response
+	 * @return \Generator|\Elastica\Task Task containing result of the deletion
+	 * @throws Exception when task reports failures
+	 */
+	public static function deleteByQuery( \Elastica\Index $index, \Elastica\Query $query ) {
+		$response = $index->deleteByQuery( $query, [
+			'wait_for_completion' => false,
+			'scroll' => '15m',
+		] )->getData();
+		if ( !isset( $response['task'] ) ) {
+			throw new \Exception( 'No task returned: ' . var_export( $response, true ) );
+		}
+		$task = new \Elastica\Task(
+			$type->getIndex()->getClient(),
+			$response['task'] );
+		while ( !$task->isCompleted() ) {
+			yield $task->getData();
+			sleep( 5 );
+			$task->refresh();
+		}
+
+		$response = $task->getData()['response'];
+		if ( $response['failures'] ) {
+			throw new \Exception( implode( ', ', $response['failures'] ) );
+		}
+
+		return $task;
+	}
+
+	const METASTORE_INDEX_NAME = 'mw_cirrus_metastore';
+	const ALL_INDEXES_FROZEN_NAME = 'freeze-everything';
+
+	/**
+	 * @param Client $client
+	 * @return bool True when no writes should be sent via $client
+	 */
+	public static function isFrozen( Client $client ) {
+		// TODO: This should be a hook that cirrus implements to tell
+		// others to not try to write to a cluster.
+		$ids = ( new \Elastica\Query\Ids() )
+			->addId( self::ALL_INDEXES_FROZEN_NAME );
+		$resp = $client
+			->getIndex( self::METASTORE_INDEX_NAME )
+			->search( \Elastica\Query::create( $ids ) );
+
+		return $resp->count() > 0;
+	}
 }
