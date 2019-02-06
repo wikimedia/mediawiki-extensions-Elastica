@@ -18,6 +18,7 @@
 		]
 	},
 	"AutoloadClasses": {
+		"ElasticaTask": "includes/ElasticaTask.php",
 		"ElasticaHooks": "includes/ElasticaHooks.php",
 		"ElasticaConnection": "includes/ElasticaConnection.php",
 		"ElasticaHttpTransportCloser": "includes/ElasticaHttpTransportCloser.php",
