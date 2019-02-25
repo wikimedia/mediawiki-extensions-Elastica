@@ -134,8 +134,8 @@ class MWElasticUtils {
 		if ( !isset( $response['task'] ) ) {
 			throw new \Exception( 'No task returned: ' . var_export( $response, true ) );
 		}
-		$task = new ElasticaTask(
-			$index->getClient(),
+		$task = new \Elastica\Task(
+			$type->getIndex()->getClient(),
 			$response['task'] );
 		while ( !$task->isCompleted() ) {
 			yield $task->getData();
