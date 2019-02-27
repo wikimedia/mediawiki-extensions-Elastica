@@ -128,7 +128,7 @@ class MWElasticUtils {
 	 */
 	public static function deleteByQuery( \Elastica\Index $index, \Elastica\Query $query ) {
 		$response = $index->deleteByQuery( $query, [
-			'wait_for_completion' => false,
+			'wait_for_completion' => 'false',
 			'scroll' => '15m',
 		] )->getData();
 		if ( !isset( $response['task'] ) ) {
