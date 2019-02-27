@@ -121,7 +121,7 @@ class MWElasticUtils {
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
-	 * @return \Generator|array[]|\ElasticaTask Returns a generator. Generator yields
+	 * @return \Generator|array[]|\Elastica\Task Returns a generator. Generator yields
 	 *  arrays containing task status responses. Generator returns the Task instance
 	 *  on completion.
 	 * @throws Exception when task reports failures
@@ -135,7 +135,7 @@ class MWElasticUtils {
 			throw new \Exception( 'No task returned: ' . var_export( $response, true ) );
 		}
 		$task = new \Elastica\Task(
-			$type->getIndex()->getClient(),
+			$index->getClient(),
 			$response['task'] );
 		while ( !$task->isCompleted() ) {
 			yield $task->getData();
