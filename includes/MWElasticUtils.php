@@ -116,17 +116,40 @@ class MWElasticUtils {
 	}
 
 	/**
-	 * Delete docs by query and wait for it to complete
-	 * via tasks api.
+	 * Delete docs by query and wait for it to complete via tasks api.
+	 *
+	 * @param \Elastica\Index $index the source index
+	 * @param \Elastica\Query $query the query
+	 * @return \Elastica\Task Generator returns the Task instance on completion.
+	 * @throws Exception when task reports failures
+	 */
+	public static function deleteByQuery( \Elastica\Index $index, \Elastica\Query $query ) {
+		$gen = self::deleteByQueryWithStatus( $index, $query );
+		// @phan-suppress-next-line PhanTypeNoAccessiblePropertiesForeach always a generator object
+		foreach ( $gen as $status ) {
+			// We don't need these status updates. But we need to iterate
+			// the generator until it is done.
+		}
+		return $gen->getReturn();
+	}
+
+	/**
+	 * Delete docs by query and wait for it to complete via tasks api. This
+	 * method returns a generator which must be iterated on at least once
+	 * or the deletion will not occur.
+	 *
+	 * Client code that doesn't care about the result or when the deleteByQuery
+	 * completes are safe to call next( $gen ) a single time to start the deletion,
+	 * and then throw away the generator.
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
 	 * @return \Generator|array[]|\Elastica\Task Returns a generator. Generator yields
 	 *  arrays containing task status responses. Generator returns the Task instance
-	 *  on completion.
+	 *  on completion via Generator::getReturn.
 	 * @throws Exception when task reports failures
 	 */
-	public static function deleteByQuery( \Elastica\Index $index, \Elastica\Query $query ) {
+	public static function deleteByQueryWithStatus( \Elastica\Index $index, \Elastica\Query $query ) {
 		$response = $index->deleteByQuery( $query, [
 			'wait_for_completion' => 'false',
 			'scroll' => '15m',
