@@ -1,6 +1,7 @@
 <?php
 
 use Elastica\Client;
+use MediaWiki\Logger\LoggerFactory;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -120,11 +121,16 @@ class MWElasticUtils {
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
+	 * @param int $reportEveryNumSec Log task status on this interval of seconds
 	 * @return \Elastica\Task Generator returns the Task instance on completion.
 	 * @throws Exception when task reports failures
 	 */
-	public static function deleteByQuery( \Elastica\Index $index, \Elastica\Query $query ) {
-		$gen = self::deleteByQueryWithStatus( $index, $query );
+	public static function deleteByQuery(
+		\Elastica\Index $index,
+		\Elastica\Query $query,
+		$reportEveryNumSec = 300
+	) {
+		$gen = self::deleteByQueryWithStatus( $index, $query, $reportEveryNumSec );
 		// @phan-suppress-next-line PhanTypeNoAccessiblePropertiesForeach always a generator object
 		foreach ( $gen as $status ) {
 			// We don't need these status updates. But we need to iterate
@@ -140,16 +146,22 @@ class MWElasticUtils {
 	 *
 	 * Client code that doesn't care about the result or when the deleteByQuery
 	 * completes are safe to call next( $gen ) a single time to start the deletion,
-	 * and then throw away the generator.
+	 * and then throw away the generator. Note that logging about how long the task
+	 * has been running will not be logged if the generator is not iterated.
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
+	 * @param int $reportEveryNumSec Log task status on this interval of seconds
 	 * @return \Generator|array[]|\Elastica\Task Returns a generator. Generator yields
 	 *  arrays containing task status responses. Generator returns the Task instance
 	 *  on completion via Generator::getReturn.
 	 * @throws Exception when task reports failures
 	 */
-	public static function deleteByQueryWithStatus( \Elastica\Index $index, \Elastica\Query $query ) {
+	public static function deleteByQueryWithStatus(
+		\Elastica\Index $index,
+		\Elastica\Query $query,
+		$reportEveryNumSec = 300
+	) {
 		$response = $index->deleteByQuery( $query, [
 			'wait_for_completion' => 'false',
 			'scroll' => '15m',
@@ -157,21 +169,72 @@ class MWElasticUtils {
 		if ( !isset( $response['task'] ) ) {
 			throw new \Exception( 'No task returned: ' . var_export( $response, true ) );
 		}
+		$log = LoggerFactory::getInstance( 'Elastica' );
+		$clusterName = self::fetchClusterName( $index->getClient() );
+		$logContext = [
+			'index' => $index->getName(),
+			'cluster' => $clusterName,
+			'taskId' => $response['task'],
+		];
+		$logPrefix = 'deleteByQuery against [{index}] on cluster [{cluster}] with task id [{taskId}]';
+		$log->info( "$logPrefix starting", $logContext );
+
+		// Log tasks running longer than 10 minutes to help track down job runner
+		// timeouts that occur after 20 minutes. T219234
+		$start = MWTimestamp::time();
+		$reportAfter = $start + $reportEveryNumSec;
 		$task = new \Elastica\Task(
 			$index->getClient(),
 			$response['task'] );
 		while ( !$task->isCompleted() ) {
+			$now = MWTimestamp::time();
+			if ( $now >= $reportAfter ) {
+				$reportAfter = $now + $reportEveryNumSec;
+				$log->warning( "$logPrefix still running after [{runtime}] seconds", $logContext + [
+					'runtime' => $now - $start,
+					// json encode to ensure we don't add a bunch of properties in
+					// logstash, we only really need the content and this will still be
+					// searchable.
+					'status' => FormatJson::encode( $task->getData() ),
+				] );
+			}
 			yield $task->getData();
 			sleep( 5 );
 			$task->refresh();
 		}
 
-		$response = $task->getData()['response'];
-		if ( $response['failures'] ) {
-			throw new \Exception( implode( ', ', $response['failures'] ) );
+		$now = MWTimestamp::time();
+		$taskCompleteResponse = $task->getData()['response'];
+		if ( $taskCompleteResponse['failures'] ) {
+			$log->error( "$logPrefix failed", $logContext + [
+				'runtime' => $now - $start,
+				'status' => FormatJson::encode( $task->getData() ),
+			] );
+			throw new \Exception( 'Failed deleteByQuery: '
+				. implode( ', ', $taskCompleteResponse['failures'] ) );
 		}
 
+		$log->info( "$logPrefix completed", $logContext + [
+			'runtime' => $now - $start,
+			'status' => FormatJson::encode( $task->getData() ),
+		] );
+
 		return $task;
+	}
+
+	/**
+	 * Fetch the name of the cluster client is communicating with.
+	 *
+	 * @param Client $client Elasticsearch client to fetch name for
+	 * @return string Name of cluster $client is communicating with
+	 */
+	public static function fetchClusterName( Client $client ) {
+		$response = $client->requestEndpoint( new \Elasticsearch\Endpoints\Info );
+		if ( $response->getStatus() !== 200 ) {
+			throw new \Exception(
+				"Failed requesting cluster name, got status code [{$response->getStatus()}]" );
+		}
+		return $response->getData()['cluster_name'];
 	}
 
 	const METASTORE_INDEX_NAME = 'mw_cirrus_metastore';
