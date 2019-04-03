@@ -177,7 +177,9 @@ class MWElasticUtils {
 			'taskId' => $response['task'],
 		];
 		$logPrefix = 'deleteByQuery against [{index}] on cluster [{cluster}] with task id [{taskId}]';
-		$log->info( "$logPrefix starting", $logContext );
+		$log->info( "$logPrefix starting", $logContext + [
+			'elastic_query' => FormatJson::encode( $query->toArray() )
+		] );
 
 		// Log tasks running longer than 10 minutes to help track down job runner
 		// timeouts that occur after 20 minutes. T219234
