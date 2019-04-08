@@ -121,6 +121,11 @@ class MWElasticUtils {
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
+	 * @param bool $allowConflicts When true documents updated since starting
+	 *  the query will not be deleted, and will not fail the delete-by-query. When
+	 *  false (default) the updated document will not be deleted and the delete-by-query
+	 *  will abort. Deletes are not transactional, some subset of matching documents
+	 *  will have been deleted.
 	 * @param int $reportEveryNumSec Log task status on this interval of seconds
 	 * @return \Elastica\Task Generator returns the Task instance on completion.
 	 * @throws Exception when task reports failures
@@ -128,9 +133,10 @@ class MWElasticUtils {
 	public static function deleteByQuery(
 		\Elastica\Index $index,
 		\Elastica\Query $query,
+		$allowConflicts = false,
 		$reportEveryNumSec = 300
 	) {
-		$gen = self::deleteByQueryWithStatus( $index, $query, $reportEveryNumSec );
+		$gen = self::deleteByQueryWithStatus( $index, $query, $allowConflicts, $reportEveryNumSec );
 		// @phan-suppress-next-line PhanTypeNoAccessiblePropertiesForeach always a generator object
 		foreach ( $gen as $status ) {
 			// We don't need these status updates. But we need to iterate
@@ -151,6 +157,11 @@ class MWElasticUtils {
 	 *
 	 * @param \Elastica\Index $index the source index
 	 * @param \Elastica\Query $query the query
+	 * @param bool $allowConflicts When true documents updated since starting
+	 *  the query will not be deleted, and will not fail the delete-by-query. When
+	 *  false (default) the updated document will not be deleted and the delete-by-query
+	 *  will abort. Deletes are not transactional, some subset of matching documents
+	 *  will have been deleted.
 	 * @param int $reportEveryNumSec Log task status on this interval of seconds
 	 * @return \Generator|array[]|\Elastica\Task Returns a generator. Generator yields
 	 *  arrays containing task status responses. Generator returns the Task instance
@@ -160,12 +171,17 @@ class MWElasticUtils {
 	public static function deleteByQueryWithStatus(
 		\Elastica\Index $index,
 		\Elastica\Query $query,
+		$allowConflicts = false,
 		$reportEveryNumSec = 300
 	) {
-		$response = $index->deleteByQuery( $query, [
+		$params = [
 			'wait_for_completion' => 'false',
 			'scroll' => '15m',
-		] )->getData();
+		];
+		if ( $allowConflicts ) {
+			$params['conflicts'] = 'proceed';
+		}
+		$response = $index->deleteByQuery( $query, $params )->getData();
 		if ( !isset( $response['task'] ) ) {
 			throw new \Exception( 'No task returned: ' . var_export( $response, true ) );
 		}
