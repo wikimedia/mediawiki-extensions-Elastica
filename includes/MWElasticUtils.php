@@ -25,6 +25,8 @@ use MediaWiki\Logger\LoggerFactory;
  */
 class MWElasticUtils {
 
+	const ONE_SEC_IN_MICROSEC = 1000000;
+
 	/**
 	 * A function that retries callback $func if it throws an exception.
 	 * The $beforeRetry is called before a retry and receives the underlying
@@ -50,7 +52,7 @@ class MWElasticUtils {
 						$beforeRetry( $e, $errors );
 					} else {
 						$seconds = static::backoffDelay( $errors );
-						sleep( $seconds );
+						usleep( $seconds * self::ONE_SEC_IN_MICROSEC );
 					}
 				}
 			} else {
@@ -146,6 +148,21 @@ class MWElasticUtils {
 	}
 
 	/**
+	 * @param float $minDelay Starting value of generator
+	 * @param float $maxDelay Maximum value to return
+	 * @param float $increaseByRatio Increase by this ratio on each iteration, up to $maxDelay
+	 * @return Generator|float[] Returns a generator. Generator yields floats between
+	 *  $minDelay and $maxDelay
+	 */
+	private static function increasingDelay( $minDelay, $maxDelay, $increaseByRatio = 1.5 ) {
+		$delay = $minDelay;
+		while ( true ) {
+			yield $delay;
+			$delay = min( $delay * $increaseByRatio, $maxDelay );
+		}
+	}
+
+	/**
 	 * Delete docs by query and wait for it to complete via tasks api. This
 	 * method returns a generator which must be iterated on at least once
 	 * or the deletion will not occur.
@@ -204,6 +221,7 @@ class MWElasticUtils {
 		$task = new \Elastica\Task(
 			$index->getClient(),
 			$response['task'] );
+		$delay = self::increasingDelay( 0.05, 5 );
 		while ( !$task->isCompleted() ) {
 			$now = MWTimestamp::time();
 			if ( $now >= $reportAfter ) {
@@ -217,7 +235,8 @@ class MWElasticUtils {
 				] );
 			}
 			yield $task->getData();
-			sleep( 5 );
+			$delay->next();
+			usleep( $delay->current() * self::ONE_SEC_IN_MICROSEC );
 			$task->refresh();
 		}
 
