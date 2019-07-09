@@ -3,6 +3,7 @@
 class ElasticaHooks {
 	/**
 	 * Check if cURL PHP extension is installed
+	 * @suppress SecurityCheck-DoubleEscaped
 	 */
 	public static function checkInstalledCurl() {
 		if ( function_exists( 'curl_version' ) ) {
