@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Railfail536"
+			"Railfail536",
+			"Rail"
 		]
 	},
 	"elastica-desc": "Podstawowa funkcjonalność [https://www.elasticsearch.org/ Elasticsearch] dla innych rozszerzeń poprzez dostarczanie biblioteki [http://elastica.io/ Elastica]"
