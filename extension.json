@@ -1,6 +1,6 @@
 {
 	"name": "Elastica",
-	"version": "6.0.2",
+	"version": "6.1.0",
 	"author": [
 		"Nik Everett",
 		"Chad Horohoe"
@@ -10,7 +10,7 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.29",
+		"MediaWiki": ">= 1.34",
 		"platform": {
 			"ext-curl": "*"
 		}
