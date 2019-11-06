@@ -153,6 +153,7 @@ class MWElasticUtils {
 	 * @param float $increaseByRatio Increase by this ratio on each iteration, up to $maxDelay
 	 * @return Generator|float[] Returns a generator. Generator yields floats between
 	 *  $minDelay and $maxDelay
+	 * @suppress PhanInfiniteLoop
 	 */
 	private static function increasingDelay( $minDelay, $maxDelay, $increaseByRatio = 1.5 ) {
 		$delay = $minDelay;
