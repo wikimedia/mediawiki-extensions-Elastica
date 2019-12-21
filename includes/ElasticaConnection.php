@@ -23,7 +23,7 @@ use MediaWiki\Logger\LoggerFactory;
  */
 abstract class ElasticaConnection {
 	/**
-	 * @var \Elastica\Client
+	 * @var ?\Elastica\Client
 	 */
 	protected $client;
 

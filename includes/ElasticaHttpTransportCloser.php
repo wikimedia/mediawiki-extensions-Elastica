@@ -18,6 +18,7 @@
 
 class ElasticaHttpTransportCloser extends \Elastica\Transport\Http {
 	public static function destroySingleton() {
+		// @phan-suppress-next-line PhanTypeMismatchProperty
 		\Elastica\Transport\Http::$_curlConnection = null;
 	}
 }
