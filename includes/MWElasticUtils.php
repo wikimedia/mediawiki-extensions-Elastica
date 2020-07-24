@@ -31,7 +31,7 @@ class MWElasticUtils {
 	 *
 	 * @param int $attempts the number of times we retry
 	 * @param callable $func
-	 * @param callable $beforeRetry function called before each retry
+	 * @param callable|null $beforeRetry function called before each retry
 	 * @return mixed
 	 */
 	public static function withRetry( $attempts, $func, $beforeRetry = null ) {
