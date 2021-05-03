@@ -34,7 +34,7 @@ class UtilTest extends MediaWikiTestCase {
 
 	public function testWithRetry() {
 		$calls = 0;
-		$func = function () use ( &$calls ) {
+		$func = static function () use ( &$calls ) {
 			$calls++;
 			if ( $calls <= 5 ) {
 				throw new InvalidException();
