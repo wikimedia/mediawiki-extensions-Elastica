@@ -24,7 +24,7 @@ use Elastica\Exception\InvalidException;
 /**
  * @covers MWElasticUtils
  */
-class UtilTest extends MediaWikiTestCase {
+class UtilTest extends MediaWikiIntegrationTestCase {
 	public function testBackoffDelay() {
 		for ( $i = 0; $i < 100; $i++ ) {
 			$this->assertLessThanOrEqual( 16, MWElasticUtils::backoffDelay( 1 ) );
