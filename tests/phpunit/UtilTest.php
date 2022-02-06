@@ -1,6 +1,7 @@
 <?php
 
 use Elastica\Exception\InvalidException;
+use MediaWiki\Extension\Elastica\MWElasticUtils;
 
 /**
  * Test Util functions.
@@ -22,7 +23,7 @@ use Elastica\Exception\InvalidException;
  */
 
 /**
- * @covers MWElasticUtils
+ * @covers \MediaWiki\Extension\Elastica\MWElasticUtils
  */
 class UtilTest extends MediaWikiIntegrationTestCase {
 	public function testBackoffDelay() {
