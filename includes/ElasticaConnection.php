@@ -114,6 +114,17 @@ abstract class ElasticaConnection {
 						$connection->setEnabled( true );
 						throw $e;
 					}
+					if ( $e->getError() === CURLE_PARTIAL_FILE ) {
+						// This means the connection dropped before the full response was read,
+						// likely some sort of network problem or elasticsearch shut down
+						// mid-response. If the network failed or elasticsearch is gone the
+						// retry should fail, but we delegate deciding on retries to the caller.
+						LoggerFactory::getInstance( 'Elastica' )
+							->error( 'Error communicating with elasticsearch, connection closed' .
+								'before full response was read.', [ 'exception' => $e ] );
+						$connection->setEnabled( true );
+						throw $e;
+					}
 					if ( $e->getError() !== CURLE_COULDNT_CONNECT ) {
 						LoggerFactory::getInstance( 'Elastica' )
 							->error( 'Unexpected connection error communicating with Elasticsearch. ' .
