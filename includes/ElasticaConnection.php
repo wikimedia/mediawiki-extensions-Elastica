@@ -96,8 +96,9 @@ abstract class ElasticaConnection {
 				 * Callback for \Elastica\Client on request failures.
 				 * @param \Elastica\Connection $connection The current connection to elasticasearch
 				 * @param \Exception $e Exception to be thrown if we don't do anything
+				 * @param \Elastica\Client $client
 				 */
-				function ( $connection, $e ) {
+				function ( $connection, $e, $client ) {
 					// We only want to try to reconnect on http connection errors
 					// Beyond that we want to give up fast.  Configuring a single connection
 					// through LVS accomplishes this.
@@ -129,9 +130,16 @@ abstract class ElasticaConnection {
 						LoggerFactory::getInstance( 'Elastica' )
 							->error( 'Unexpected connection error communicating with Elasticsearch. ' .
 								'Curl code: {curl_code}', [ 'curl_code' => $e->getError() ] );
-						// This also leaves the connection disabled but at least we have a log of
-						// what happened.
-						return;
+						// If there are different connections we could try leave this connection disabled
+						// and let Elastica retry on a different connection.
+						if ( $client->hasConnection() ) {
+							return;
+						}
+						// Otherwise this was the last available connection.  Re-enable it but throw
+						// so that retries are delegated to the application. This prevents the
+						// situation where the calling code knows it can retry but no connections remain.
+						$connection->setEnabled( true );
+						throw $e;
 					}
 					// Keep track of the number of times we've hit a host
 					static $connectionAttempts = [];
