@@ -156,6 +156,10 @@ abstract class ElasticaConnection {
 									'attempts' => $connectionAttempts[ $host ],
 								] );
 						$connection->setEnabled( true );
+					} elseif ( !$client->hasConnection() ) {
+						// Don't disable the last connection, but don't let it auto-retry either.
+						$connection->setEnabled( true );
+						throw $e;
 					}
 				}
 			);
