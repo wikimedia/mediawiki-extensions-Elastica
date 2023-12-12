@@ -45,7 +45,7 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 		MWElasticUtils::withRetry( 5, $func,
 			function ( $e, $errCount ) use ( &$errorCallbackCalls ) {
 				$errorCallbackCalls++;
-				$this->assertEquals( "Elastica\Exception\InvalidException", get_class( $e ) );
+				$this->assertInstanceOf( InvalidException::class, $e );
 			}
 		);
 		$this->assertEquals( 6, $calls );
