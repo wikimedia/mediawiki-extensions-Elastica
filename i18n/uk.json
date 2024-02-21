@@ -4,5 +4,5 @@
 			"Andriykopanytsia"
 		]
 	},
-	"elastica-desc": "Базова функціональність [http://www.elasticsearch.org/ Elasticsearch] для інших модулів, забезпечувана бібліотекою [http://elastica.io/ Elastica]"
+	"elastica-desc": "Базова функціональність [https://www.elasticsearch.org/ Elasticsearch] для інших модулів, забезпечувана бібліотекою [https://elastica.io/ Elastica]"
 }
