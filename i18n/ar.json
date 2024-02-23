@@ -1,8 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"ديفيد"
-		]
-	},
-	"elastica-desc": "الوظيفة [https://www.elasticsearch.org/ Elasticsearch] الأساسية للإضافات الأخرى من خلال توفير مكتبة [https://elastica.io/ Elastica]"
-}

@@ -1,9 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"Dbc334",
-			"Eleassar"
-		]
-	},
-	"elastica-desc": "Osnovna funkcionalnost [https://www.elasticsearch.org/ Elasticsearch] za druge razširitve z uporabo knjižnice [https://elastica.io/ Elastica]"
-}

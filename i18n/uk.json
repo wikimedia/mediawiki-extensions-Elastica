@@ -1,8 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"Andriykopanytsia"
-		]
-	},
-	"elastica-desc": "Базова функціональність [https://www.elasticsearch.org/ Elasticsearch] для інших модулів, забезпечувана бібліотекою [https://elastica.io/ Elastica]"
-}
