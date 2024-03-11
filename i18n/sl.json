@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "Osnovna funkcionalnost [https://www.elastic.co/ Elasticsearch] za druge razširitve z uporabo knjižnice [https://elastica.io/ Elastica]"
+}

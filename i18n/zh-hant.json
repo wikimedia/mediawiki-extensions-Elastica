@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "提供 [https://elastica.io/ Elastica] 函式庫以提供其他擴充套件基礎的 [https://www.elastic.co/ Elasticsearch] 功能。"
+}

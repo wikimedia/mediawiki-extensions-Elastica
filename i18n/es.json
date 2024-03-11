@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eulalio"
+		]
+	},
+	"elastica-desc": "Funcionalidad base [https://www.elastic.co/ Elasticsearch] para otras extensiones al proporcionar la biblioteca [https://elastic.io/ Elastica]"
+}

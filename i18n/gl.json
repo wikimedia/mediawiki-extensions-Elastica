@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "Funcionalidade [https://www.elastic.co/ Elasticsearch] de base para outras extensións achegando a biblioteca [https://elastica.io/ Elastica]"
+}

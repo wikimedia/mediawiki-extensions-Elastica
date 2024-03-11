@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "用于其他基于[https://elastica.io/ Elastica]库的[https://www.elastic.co/ Elasticsearch]功能扩展"
+}

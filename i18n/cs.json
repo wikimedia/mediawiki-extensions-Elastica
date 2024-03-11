@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "Základní funkcionalita [https://www.elastic.co/ Elasticsearch] pro další rozšíření prostřednictvím knihovny [https://elastica.io/ Elastica]"
+}
