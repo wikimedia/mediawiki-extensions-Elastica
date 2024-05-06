@@ -1,6 +1,0 @@
-{
-	"@metadata": {
-		"authors": []
-	},
-	"elastica-desc": "Grundläggande [https://www.elastic.co/ Elasticsearch]-funktionalitet för andra tillägg genom att tillhandahålla [https://elastica.io/ Elastica]-bibliotek"
-}

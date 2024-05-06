@@ -1,6 +1,0 @@
-{
-	"@metadata": {
-		"authors": []
-	},
-	"elastica-desc": "Hỗ trợ chức năng [https://www.elastic.co/ Elasticsearch] cơ bản trong các phần mở rộng khác qua thư viện [https://elastica.io/ Elastica]"
-}
