@@ -1,0 +1,6 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"elastica-desc": "Основна функција на [https://www.elastic.co/ Elasticsearch] што ја користат други додатоци, давајќи библиотека [https://elastica.io/ Elastica]."
+}
