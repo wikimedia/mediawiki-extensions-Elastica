@@ -63,7 +63,7 @@ class MWElasticUtils {
 						$beforeRetry( $e, $errors );
 					} else {
 						$seconds = static::backoffDelay( $errors );
-						usleep( $seconds * self::ONE_SEC_IN_MICROSEC );
+						usleep( (int)( $seconds * self::ONE_SEC_IN_MICROSEC ) );
 					}
 				}
 			} else {
@@ -246,7 +246,7 @@ class MWElasticUtils {
 			}
 			yield $task->getData();
 			$delay->next();
-			usleep( $delay->current() * self::ONE_SEC_IN_MICROSEC );
+			usleep( (int)( $delay->current() * self::ONE_SEC_IN_MICROSEC ) );
 			$task->refresh();
 		}
 
