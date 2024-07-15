@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Suleiman the Magnificent Television"
+		]
+	},
+	"elastica-desc": "다른 확장 기능에 [https://elastica.io/ Elastica] 라이브러리를 제공하여 [https://www.elastic.co/ Elasticsearch] 기본 기능을 제공"
+}
