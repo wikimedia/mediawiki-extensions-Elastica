@@ -4,11 +4,13 @@ namespace MediaWiki\Extension\Elastica;
 
 use Elastica\Client;
 use Elastica\Index;
+use Mediawiki\Http\Telemetry;
 use MediaWiki\Logger\LoggerFactory;
 
 /**
  * Forms and caches connection to Elasticsearch as well as client objects
- * that contain connection information like \Elastica\Index.
+ * that contain connection information like \Elastica\Index. Propagates
+ * distributed tracing headers.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -84,11 +86,12 @@ abstract class ElasticaConnection {
 				$serverList = [ $serverList ];
 			}
 			foreach ( $serverList as $server ) {
-				if ( is_array( $server ) ) {
-					$servers[] = $server;
-				} else {
-					$servers[] = [ 'host' => $server ];
+				if ( !is_array( $server ) ) {
+					$server = [ 'host' => $server ];
 				}
+				$server['headers'] = ( $server['headers'] ?? [] )
+					+ Telemetry::getInstance()->getRequestHeaders();
+				$servers[] = $server;
 			}
 
 			$this->client = new Client( [ 'servers' => $servers ],
