@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Умар"
+		]
 	},
-	"elastica-desc": "Коьрта функци [https://www.elastic.co/ Elasticsearch] кхечу модульшна, библиотека [https://elastica.io/ Elastica] латош йолу"
+	"elastica-desc": "Коьрта [https://www.elastic.co/ Elasticsearch] функционал кхечу модулашна, [https://elastica.io/ Elastica] библиотеко луш йолу"
 }
