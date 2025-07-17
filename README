@@ -18,7 +18,7 @@ way.  It contains support for indexes that have the concept of "type" and
 "Type" and "identifier"
 -----------------------
 Index "type" in the CirrusSearch sense is used to the search corpus into
-different "types" of index so those indecies can be configured with different
+different "types" of index so those indices can be configured with different
 sharding and replication configuration, and so suggestions, which are based on
 term frequency, are more accurate.  For example, CirrusSearch has a "content"
 index type which stores just content articles and a "general" index type which
