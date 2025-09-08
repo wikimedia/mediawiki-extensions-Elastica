@@ -61,7 +61,7 @@ class MWElasticUtils {
 					$errors++;
 					if ( $beforeRetry ) {
 						$beforeRetry( $e, $errors );
-					} else {
+					} elseif ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 						$seconds = static::backoffDelay( $errors );
 						usleep( (int)( $seconds * self::ONE_SEC_IN_MICROSEC ) );
 					}
@@ -121,7 +121,9 @@ class MWElasticUtils {
 					return true;
 				}
 				yield "\tIndex is $status retrying...";
-				sleep( 5 );
+				if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+					sleep( 5 );
+				}
 			} catch ( \Exception $e ) {
 				yield "Error while waiting for green ({$e->getMessage()}), retrying...";
 			}
