@@ -176,10 +176,12 @@ abstract class ElasticaConnection {
 	 * @param string $name get the index(es) with this basename
 	 * @param string|bool $type type of index (named type or false to get all)
 	 * @param mixed $identifier if specified get the named identifier of the index
+	 * @param bool $altIndex get an alternative index
+	 * @param int $altIndexId get an alternative index with this ID
 	 * @return Index
 	 */
-	public function getIndex( $name, $type = false, $identifier = false ) {
-		return $this->getClient()->getIndex( $this->getIndexName( $name, $type, $identifier ) );
+	public function getIndex( $name, $type = false, $identifier = false, bool $altIndex = false, int $altIndexId = 0 ) {
+		return $this->getClient()->getIndex( $this->getIndexName( $name, $type, $identifier, $altIndex, $altIndexId ) );
 	}
 
 	/**
@@ -187,11 +189,22 @@ abstract class ElasticaConnection {
 	 * @param string $name get the index(es) with this basename
 	 * @param string|bool $type type of index (named type or false to get all)
 	 * @param mixed $identifier if specified get the named identifier of the index
+	 * @param bool $altIndex get an alternative index
+	 * @param int $altIndexId get an alternative index with this ID
 	 * @return string name of index for $type and $identifier
 	 */
-	public function getIndexName( $name, $type = false, $identifier = false ) {
+	public function getIndexName(
+		$name,
+		$type = false,
+		$identifier = false,
+		bool $altIndex = false,
+		int $altIndexId = 0
+	) {
 		if ( $type ) {
 			$name .= '_' . $type;
+		}
+		if ( $altIndex ) {
+			$name .= "_alt_" . $altIndexId;
 		}
 		if ( $identifier ) {
 			$name .= '_' . $identifier;
