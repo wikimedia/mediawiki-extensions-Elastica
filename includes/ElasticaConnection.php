@@ -4,7 +4,7 @@ namespace MediaWiki\Extension\Elastica;
 
 use Elastica\Client;
 use Elastica\Index;
-use Mediawiki\Http\Telemetry;
+use MediaWiki\Http\Telemetry;
 use MediaWiki\Logger\LoggerFactory;
 
 /**
